@@ -9,9 +9,10 @@ import com.lea.gui.formgroups.FormGroup;
 import com.lea.gui.formgroups.NumberFormGroup;
 import com.lea.gui.formgroups.OptionFormGroup;
 import com.lea.gui.formgroups.TextFormGroup;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -27,11 +29,18 @@ import javax.swing.JOptionPane;
 public class FormGroupsTest extends JFrame {
 
     private List<FormGroup> formGroups;
+    private JPanel contentPane;
+    private JButton btnAdd;
 
     public FormGroupsTest() {
+        super("Testiranje - form groups");
+        contentPane = new JPanel();
+        btnAdd = new JButton();
         formGroups = new ArrayList<>();
-        initForm();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         initComponents();
+        drawForm();
     }
 
     public static void main(String[] args) {
@@ -40,7 +49,6 @@ public class FormGroupsTest extends JFrame {
             @Override
             public void run() {
                 FormGroupsTest form = new FormGroupsTest();
-                form.setLocationRelativeTo(null);
                 form.setVisible(true);
             }
         });
@@ -64,14 +72,6 @@ public class FormGroupsTest extends JFrame {
         FormGroup drzavaDdl = new OptionFormGroup("Choose a country", someCountries);
         formGroups.add(drzavaDdl);
 
-        for (FormGroup formGroup : formGroups) {
-            this.getContentPane().add(formGroup.getLabel());
-            this.getContentPane().add(formGroup.getComponent());
-        }
-
-//        this.getContentPane().add(cityName.getLabel());
-//        this.getContentPane().add(cityName.getComponent());
-        JButton btnAdd = new JButton();
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,14 +90,37 @@ public class FormGroupsTest extends JFrame {
             }
         });
         btnAdd.setText("Save");
-        this.getContentPane().add(btnAdd);
+
     }
 
-    private void initForm() {
-        this.setTitle("Add city - TEST");
-        this.setLayout(new GridLayout(0, 2));
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setBounds(50, 50, 300, 150);
+    private void drawForm() {
+
+        contentPane.setPreferredSize(new Dimension(400, 200));
+        GridBagLayout layout = new GridBagLayout();
+        contentPane.setLayout(layout);
+        contentPane.setOpaque(true);
+        setContentPane(contentPane);
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = .8;
+        c.weighty = .5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 20, 5, 20);
+        c.gridx = 0;
+        c.gridy = 0;
+
+        for (FormGroup formGroup : formGroups) {
+            contentPane.add(formGroup.getLabel(), c);
+            c.gridx++;
+            contentPane.add(formGroup.getComponent(), c);
+            c.gridy++;
+            c.gridx = 0;
+        }
+        c.gridx = 1;
+        this.getContentPane().add(btnAdd, c);
+
+        pack();
+
     }
 
     private void saveCity(String string) {
