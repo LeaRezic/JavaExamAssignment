@@ -5,8 +5,11 @@
  */
 package com.lea.output.console;
 
+import com.lea.bll.datamanagers.BasicDetailsManager;
 import com.lea.bll.datamanagers.DoctorManager;
+import com.lea.bll.viewmodels.BasicDetailsVM;
 import com.lea.bll.viewmodels.DoctorVM;
+import com.lea.dal.hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +25,15 @@ public class Main {
     public static void main(String[] args) {
         
         List<DoctorVM> doctors = new ArrayList<DoctorVM>();
-        doctors = new DoctorManager().getAllDoctors();
+        doctors = new DoctorManager().getAll();
         for (DoctorVM doctor : doctors) {
             System.out.println(doctor.toString());
         }
         
+//        BasicDetailsVM someonesDetails = new BasicDetailsManager().getById(10);
+//        System.out.println(someonesDetails.toString());
+        
+        HibernateUtil.shutdown();
         
     }
     

@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class Appointment  implements java.io.Serializable {
+public class Appointment extends EntityBase implements java.io.Serializable {
 
 
      private int idappointment;

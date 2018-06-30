@@ -19,7 +19,7 @@ import javax.persistence.Table;
          schema = "dbo",
          catalog = "VirgoHospitals"
 )
-public class BasicDetails implements java.io.Serializable {
+public class BasicDetails extends EntityBase implements java.io.Serializable {
 
     private int idbasicDetails;
     private City city;

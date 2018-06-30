@@ -15,12 +15,12 @@ import java.util.List;
  *
  * @author Lea
  */
-public final class DoctorManager extends DataManagerBase {
+public final class DoctorManager extends DataManager {
 
     public DoctorManager() {
     }
 
-    public List<DoctorVM> getAllDoctors() {
+    public List<DoctorVM> getAll() {
         List<DoctorVM> doctors = new ArrayList<>();
         for (Doctor entity : repository.getAllDoctors()) {
             doctors.add(convertEntityToViewModel(entity));

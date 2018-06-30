@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class EmergencyRegistration  implements java.io.Serializable {
+public class EmergencyRegistration extends EntityBase implements java.io.Serializable {
 
 
      private int idemergencyRegistration;

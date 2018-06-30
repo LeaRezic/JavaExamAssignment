@@ -20,7 +20,7 @@ import javax.persistence.Table;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class MaritalStatus  implements java.io.Serializable {
+public class MaritalStatus extends EntityBase implements java.io.Serializable {
 
 
      private int idmaritalStatus;

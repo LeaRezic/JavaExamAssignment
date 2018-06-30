@@ -25,7 +25,7 @@ import javax.persistence.UniqueConstraint;
          catalog = "VirgoHospitals",
          uniqueConstraints = @UniqueConstraint(columnNames = "BasicDetailsID")
 )
-public class Doctor implements java.io.Serializable {
+public class Doctor extends EntityBase implements java.io.Serializable {
 
     private int iddoctor;
     private BasicDetails basicDetails;

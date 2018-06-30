@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class Receipt  implements java.io.Serializable {
+public class Receipt extends EntityBase implements java.io.Serializable {
 
 
      private int idreceipt;

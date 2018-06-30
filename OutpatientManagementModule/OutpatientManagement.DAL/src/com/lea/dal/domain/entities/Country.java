@@ -21,7 +21,7 @@ import javax.persistence.Table;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class Country  implements java.io.Serializable {
+public class Country extends EntityBase implements java.io.Serializable {
 
 
      private int idcountry;

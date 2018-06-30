@@ -33,7 +33,7 @@ import javax.persistence.UniqueConstraint;
             , @UniqueConstraint(columnNames = "MedicalDetailsID")
             , @UniqueConstraint(columnNames = "OPID")}
 )
-public class Patient implements java.io.Serializable {
+public class Patient extends EntityBase implements java.io.Serializable {
 
     private int idpatient;
     private BasicDetails basicDetailsByNextOfKinId;

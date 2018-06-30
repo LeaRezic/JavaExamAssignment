@@ -5,62 +5,68 @@
  */
 package com.lea.bll.viewmodels;
 
-import java.util.Date;
 
 /**
  *
  * @author Lea
  */
 public class BasicDetailsVM extends ViewModel {
-    private int idperson;
-     private AddressVM address;
-     private ContactInformationVM contactInformation;
-     private String firstName;
-     private String middleName;
-     private String lastName;
-     private Boolean sex;
-     private Date dateOfBirth;
+    
+    private int idbasicDetails;
+    private CityVM city;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String fullStreet;
+    private String pincode;
+    private String telephone;
+    private String mobilePhone;
+    private String email;
 
     public BasicDetailsVM() {
+        city = new CityVM();
     }
 
-    public BasicDetailsVM(int idperson, AddressVM address, ContactInformationVM contactInformation, String firstName, String middleName, String lastName, Boolean sex, Date dateOfBirth) {
-        this.idperson = idperson;
-        this.address = address;
-        this.contactInformation = contactInformation;
+    public BasicDetailsVM(int idbasicDetails, CityVM city, String firstName, String lastName, String fullStreet, String pincode) {
+        this.idbasicDetails = idbasicDetails;
+        this.city = city;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullStreet = fullStreet;
+        this.pincode = pincode;
+    }
+
+    public BasicDetailsVM(int idbasicDetails, CityVM city, String firstName, String middleName, String lastName, String fullStreet, String pincode, String telephone, String mobilePhone, String email) {
+        this.idbasicDetails = idbasicDetails;
+        this.city = city;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.sex = sex;
-        this.dateOfBirth = dateOfBirth;
+        this.fullStreet = fullStreet;
+        this.pincode = pincode;
+        this.telephone = telephone;
+        this.mobilePhone = mobilePhone;
+        this.email = email;
     }
 
-    public int getIdperson() {
-        return idperson;
+    public int getIdbasicDetails() {
+        return this.idbasicDetails;
     }
 
-    public void setIdperson(int idperson) {
-        this.idperson = idperson;
+    public void setIdbasicDetails(int idbasicDetails) {
+        this.idbasicDetails = idbasicDetails;
     }
 
-    public AddressVM getAddress() {
-        return address;
+    public CityVM getCityVM() {
+        return this.city;
     }
 
-    public void setAddress(AddressVM address) {
-        this.address = address;
-    }
-
-    public ContactInformationVM getContactInformation() {
-        return contactInformation;
-    }
-
-    public void setContactInformation(ContactInformationVM contactInformation) {
-        this.contactInformation = contactInformation;
+    public void setCityVM(CityVM city) {
+        this.city = city;
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -68,7 +74,7 @@ public class BasicDetailsVM extends ViewModel {
     }
 
     public String getMiddleName() {
-        return middleName;
+        return this.middleName;
     }
 
     public void setMiddleName(String middleName) {
@@ -76,29 +82,58 @@ public class BasicDetailsVM extends ViewModel {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public Boolean getSex() {
-        return sex;
+    public String getFullStreet() {
+        return this.fullStreet;
     }
 
-    public void setSex(Boolean sex) {
-        this.sex = sex;
+    public void setFullStreet(String fullStreet) {
+        this.fullStreet = fullStreet;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getPincode() {
+        return this.pincode;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
-     
-     
-     
+
+    public String getTelephone() {
+        return this.telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getMobilePhone() {
+        return this.mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "BasicDetailsVM{" + "idbasicDetails=" + idbasicDetails + "City=" + city.getName() + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + '}';
+    }
+    
+    
+    
 }

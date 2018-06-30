@@ -12,10 +12,10 @@ import com.lea.dal.infrastructure.RepositoryFactory;
  *
  * @author Lea
  */
-public abstract class DataManagerBase {
+public abstract class DataManager {
     final Repository repository;
 
-    public DataManagerBase() {
+    public DataManager() {
         this.repository = RepositoryFactory.GetDefaultInstace();
         //this.repository = new DatabaseRepository();
     }

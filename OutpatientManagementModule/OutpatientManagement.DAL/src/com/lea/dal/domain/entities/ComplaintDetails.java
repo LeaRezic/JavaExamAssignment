@@ -21,7 +21,7 @@ import javax.persistence.Table;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class ComplaintDetails  implements java.io.Serializable {
+public class ComplaintDetails extends EntityBase implements java.io.Serializable {
 
 
      private int idcomplaintDetails;

@@ -10,6 +10,11 @@ package com.lea.bll.viewmodels;
  * @author Lea
  */
 public class DoctorVM extends ViewModel {
+    
+    public enum DoctorSpecialization {
+        GENERAL_PHYSICIAN, ANESTESIOLOGIST, DERMATOLOGIST
+    }
+    
     private int iddoctor;
      private BasicDetailsVM basicDetails;
      private String title;

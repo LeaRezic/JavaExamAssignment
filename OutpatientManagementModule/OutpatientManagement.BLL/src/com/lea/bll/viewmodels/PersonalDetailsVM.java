@@ -5,48 +5,91 @@
  */
 package com.lea.bll.viewmodels;
 
+import java.util.Date;
+
 /**
  *
  * @author Lea
  */
 public class PersonalDetailsVM extends ViewModel {
+
+    public enum MaritalStatus {
+        MARRIED, SINGLE, DIVORCED, WIDOWED, CIVIL_PARTNERSHIP
+    }
+    
+    public enum BloodType {
+        A_PLUS, A_MINUS, B_PLUS, B_MINUS, AB_PLUS, AB_MINUS, ZERO_PLUS, ZERO_MINUS
+    }
+
     private int idpersonalDetails;
-     private String maritalStatus;
-     private String occupation;
-     private Double height;
-     private Double weight;
-     private String bloodTypeRh;
+    private String bloodType;
+    private String maritalStatus;
+    private Boolean sex;
+    private Date dateOfBirth;
+    private String occupation;
+    private Double height;
+    private Double weight;
 
     public PersonalDetailsVM() {
     }
 
-    public PersonalDetailsVM(int idpersonalDetails, String maritalStatus, String occupation, Double height, Double weight, String bloodTypeRh) {
+    public PersonalDetailsVM(int idpersonalDetails) {
         this.idpersonalDetails = idpersonalDetails;
+    }
+
+    public PersonalDetailsVM(int idpersonalDetails, String bloodType, String maritalStatus, Boolean sex, Date dateOfBirth, String occupation, Double height, Double weight) {
+        this.idpersonalDetails = idpersonalDetails;
+        this.bloodType = bloodType;
         this.maritalStatus = maritalStatus;
+        this.sex = sex;
+        this.dateOfBirth = dateOfBirth;
         this.occupation = occupation;
         this.height = height;
         this.weight = weight;
-        this.bloodTypeRh = bloodTypeRh;
     }
 
     public int getIdpersonalDetails() {
-        return idpersonalDetails;
+        return this.idpersonalDetails;
     }
 
     public void setIdpersonalDetails(int idpersonalDetails) {
         this.idpersonalDetails = idpersonalDetails;
     }
 
+    public String getBloodType() {
+        return this.bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
     public String getMaritalStatus() {
-        return maritalStatus;
+        return this.maritalStatus;
     }
 
     public void setMaritalStatus(String maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 
+    public Boolean getSex() {
+        return this.sex;
+    }
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
+
+    public Date getDateOfBirth() {
+        return this.dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getOccupation() {
-        return occupation;
+        return this.occupation;
     }
 
     public void setOccupation(String occupation) {
@@ -54,7 +97,7 @@ public class PersonalDetailsVM extends ViewModel {
     }
 
     public Double getHeight() {
-        return height;
+        return this.height;
     }
 
     public void setHeight(Double height) {
@@ -62,20 +105,11 @@ public class PersonalDetailsVM extends ViewModel {
     }
 
     public Double getWeight() {
-        return weight;
+        return this.weight;
     }
 
     public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public String getBloodTypeRh() {
-        return bloodTypeRh;
-    }
-
-    public void setBloodTypeRh(String bloodTypeRh) {
-        this.bloodTypeRh = bloodTypeRh;
-    }
-     
-     
 }

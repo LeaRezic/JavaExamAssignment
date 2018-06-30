@@ -21,7 +21,7 @@ import javax.persistence.Table;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class BloodType  implements java.io.Serializable {
+public class BloodType extends EntityBase implements java.io.Serializable {
 
 
      private int idbloodType;
