@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="City"
     ,schema="dbo"
-    ,catalog="OutpatientManagement"
+    ,catalog="VirgoHospitals"
 )
 public class City  implements java.io.Serializable {
 
@@ -29,7 +29,6 @@ public class City  implements java.io.Serializable {
      private int idcity;
      private Country country;
      private String name;
-     private Set<Address> addresses = new HashSet<Address>(0);
 
     public City() {
     }
@@ -39,12 +38,6 @@ public class City  implements java.io.Serializable {
         this.idcity = idcity;
         this.country = country;
         this.name = name;
-    }
-    public City(int idcity, Country country, String name, Set<Address> addresses) {
-       this.idcity = idcity;
-       this.country = country;
-       this.name = name;
-       this.addresses = addresses;
     }
    
      @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,18 +69,6 @@ public class City  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="city")
-    public Set<Address> getAddresses() {
-        return this.addresses;
-    }
-    
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-
-
 
 }
 

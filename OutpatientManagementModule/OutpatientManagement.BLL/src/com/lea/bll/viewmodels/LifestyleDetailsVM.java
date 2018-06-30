@@ -9,7 +9,7 @@ package com.lea.bll.viewmodels;
  *
  * @author Lea
  */
-public class LifestyleDetailsVM {
+public class LifestyleDetailsVM extends ViewModel {
     private int idlifestyleDetails;
      private Boolean vegetarian;
      private Integer cigaretsPerDay;

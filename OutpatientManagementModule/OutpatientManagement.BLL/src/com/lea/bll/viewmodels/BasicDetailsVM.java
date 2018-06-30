@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Lea
  */
-public class BasicDetailsVM {
+public class BasicDetailsVM extends ViewModel {
     private int idperson;
      private AddressVM address;
      private ContactInformationVM contactInformation;

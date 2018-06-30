@@ -9,7 +9,7 @@ package com.lea.bll.viewmodels;
  *
  * @author Lea
  */
-public class ContactInformationVM {
+public class ContactInformationVM extends ViewModel {
     public ContactInformationVM(int idcontactInformation, String telephone, String mobilePhone, String email) {
         this.idcontactInformation = idcontactInformation;
         this.telephone = telephone;

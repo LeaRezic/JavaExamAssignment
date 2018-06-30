@@ -9,7 +9,7 @@ package com.lea.bll.viewmodels;
  *
  * @author Lea
  */
-public class MedicalDetailsVM {
+public class MedicalDetailsVM extends ViewModel {
     private int idmedicalDetails;
      private String surgeriesHistory;
      private String allergiesCondition;

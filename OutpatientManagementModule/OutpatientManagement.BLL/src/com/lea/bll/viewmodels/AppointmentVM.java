@@ -15,7 +15,7 @@ import java.util.Set;
  *
  * @author Lea
  */
-public class AppointmentVM {
+public class AppointmentVM extends ViewModel {
 
     private int idappointment;
     private DoctorVM doctor;

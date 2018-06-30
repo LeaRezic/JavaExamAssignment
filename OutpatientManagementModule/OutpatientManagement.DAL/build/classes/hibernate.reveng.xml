@@ -40,22 +40,23 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="OutpatientManagement" match-schema="dbo"/>
-  <table-filter match-name="ComplaintDetails"/>
-  <table-filter match-name="Address"/>
-  <table-filter match-name="PersonalDetails"/>
-  <table-filter match-name="MedicalDetails"/>
-  <table-filter match-name="BasicDetails"/>
-  <table-filter match-name="Receipt"/>
-  <table-filter match-name="ContactInformation"/>
-  <table-filter match-name="HospitalService"/>
-  <table-filter match-name="AppointmentService"/>
-  <table-filter match-name="LifestyleDetails"/>
-  <table-filter match-name="City"/>
-  <table-filter match-name="Doctor"/>
-  <table-filter match-name="EmergencyRegistration"/>
-  <table-filter match-name="Patient"/>
-  <table-filter match-name="Appointment"/>
-  <table-filter match-name="Country"/>
-  <table-filter match-name="HospitalServiceCategory"/>
+    <schema-selection match-catalog="OutpatientManagement" match-schema="dbo"/>
+    <table-filter match-name="ComplaintDetails"/>
+    <table-filter match-name="PersonalDetails"/>
+    <table-filter match-name="MedicalDetails"/>
+    <table-filter match-name="BasicDetails"/>
+    <table-filter match-name="Receipt"/>
+    <table-filter match-name="HospitalService"/>
+    <table-filter match-name="AppointmentService"/>
+    <table-filter match-name="LifestyleDetails"/>
+    <table-filter match-name="City"/>
+    <table-filter match-name="Doctor"/>
+    <table-filter match-name="EmergencyRegistration"/>
+    <table-filter match-name="Patient"/>
+    <table-filter match-name="Appointment"/>
+    <table-filter match-name="Country"/>
+    <table-filter match-name="HospitalServiceCategory"/>
+    <table-filter match-name="MaritalStatus"/>
+    <table-filter match-name="DoctorSpecialization"/>
+    <table-filter match-name="BloodType"/>
 </hibernate-reverse-engineering>

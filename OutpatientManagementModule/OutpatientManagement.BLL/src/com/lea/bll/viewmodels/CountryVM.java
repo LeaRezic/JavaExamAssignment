@@ -9,7 +9,7 @@ package com.lea.bll.viewmodels;
  *
  * @author Lea
  */
-public class CountryVM {
+public class CountryVM extends ViewModel {
     private int idcountry;
      private String name;
 

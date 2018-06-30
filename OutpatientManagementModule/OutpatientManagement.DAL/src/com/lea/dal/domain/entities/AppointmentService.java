@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="AppointmentService"
     ,schema="dbo"
-    ,catalog="OutpatientManagement"
+    ,catalog="VirgoHospitals"
 )
 public class AppointmentService  implements java.io.Serializable {
 

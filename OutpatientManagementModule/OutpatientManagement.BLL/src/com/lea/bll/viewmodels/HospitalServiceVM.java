@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  *
  * @author Lea
  */
-public class HospitalServiceVM {
+public class HospitalServiceVM extends ViewModel {
     private int idhospitalService;
      private HospitalServiceCategoryVM hospitalServiceCategory;
      private String name;

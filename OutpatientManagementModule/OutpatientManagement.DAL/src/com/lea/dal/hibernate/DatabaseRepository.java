@@ -37,7 +37,6 @@ public class DatabaseRepository implements Repository {
             ex.printStackTrace();
         } finally {
             session.close();
-            //HibernateUtil.shutdown();
         }
         return entityList;
     }

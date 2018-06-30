@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Lea
  */
-public class EmergencyRegistrationVM {
+public class EmergencyRegistrationVM extends ViewModel {
     private int idemergencyRegistration;
      private int patientId;
      private Date registryDate;

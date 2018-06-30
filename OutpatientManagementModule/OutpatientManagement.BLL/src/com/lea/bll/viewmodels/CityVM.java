@@ -5,14 +5,11 @@
  */
 package com.lea.bll.viewmodels;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  *
  * @author Lea
  */
-public class CityVM {
+public class CityVM extends ViewModel {
     private int idcity;
      private CountryVM country;
      private String name;

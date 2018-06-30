@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="Receipt"
     ,schema="dbo"
-    ,catalog="OutpatientManagement"
+    ,catalog="VirgoHospitals"
 )
 public class Receipt  implements java.io.Serializable {
 

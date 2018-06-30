@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ComplaintDetails"
     ,schema="dbo"
-    ,catalog="OutpatientManagement"
+    ,catalog="VirgoHospitals"
 )
 public class ComplaintDetails  implements java.io.Serializable {
 

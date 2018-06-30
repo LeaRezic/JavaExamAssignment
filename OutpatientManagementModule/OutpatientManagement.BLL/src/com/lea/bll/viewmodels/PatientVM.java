@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Lea
  */
-public class PatientVM {
+public class PatientVM extends ViewModel {
     private int idpatient;
      private BasicDetailsVM basicDetailsByNextOfKinId;
      private BasicDetailsVM basicDetailsByBasicDetailsId;

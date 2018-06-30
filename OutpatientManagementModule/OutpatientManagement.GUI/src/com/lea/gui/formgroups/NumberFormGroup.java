@@ -17,8 +17,8 @@ public class NumberFormGroup extends FormGroup {
     public JSpinner spinner;
     public int maxValue;
     
-    public NumberFormGroup(String labelText, int max) {
-        super(labelText);
+    public NumberFormGroup(String labelText, Boolean isMandatory, int max) {
+        super(labelText, isMandatory);
         maxValue = max;
         spinner = new JSpinner();
     }

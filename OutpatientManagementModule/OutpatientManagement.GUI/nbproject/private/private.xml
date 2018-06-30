@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/formgroups/NumberFormGroup.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/formbuilders/BasicDetailsPanel.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/formbuilders/ViewModelPanel.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/formgroups/FormGroup.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/formgroups/OptionFormGroup.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/formgroups/TextFormGroup.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/output/gui/FormGroupsTest.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/formbuilders/PanelType.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Lea
  */
-public class ReceiptVM {
+public class ReceiptVM extends ViewModel {
     private int idreceipt;
      private AppointmentVM appointment;
      private Date issueDate;

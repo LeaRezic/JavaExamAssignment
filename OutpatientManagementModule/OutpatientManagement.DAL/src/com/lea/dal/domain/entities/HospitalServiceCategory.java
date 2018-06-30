@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="HospitalServiceCategory"
     ,schema="dbo"
-    ,catalog="OutpatientManagement"
+    ,catalog="VirgoHospitals"
 )
 public class HospitalServiceCategory  implements java.io.Serializable {
 

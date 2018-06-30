@@ -10,7 +10,7 @@ package com.lea.bll.viewmodels;
  *
  * @author Lea
  */
-public class AddressVM {
+public class AddressVM extends ViewModel {
     private int idaddress;
      private CityVM city;
      private String fullStreet;

@@ -19,8 +19,8 @@ public class OptionFormGroup extends FormGroup {
     public JComboBox comboBox;
     private final DefaultComboBoxModel<String> comboModel;
 
-    public OptionFormGroup(String labelText, List<String> options) {
-        super(labelText);
+    public OptionFormGroup(String labelText, Boolean isMandatory, List<String> options) {
+        super(labelText, isMandatory);
         comboBox = new JComboBox();
         comboModel = new DefaultComboBoxModel<>();
         setComboBoxOptions(options);

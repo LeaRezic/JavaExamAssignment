@@ -27,10 +27,11 @@ public class HibernateUtil {
                     .configure()
                     .addAnnotatedClass(Country.class)
                     .addAnnotatedClass(City.class)
-                    .addAnnotatedClass(Address.class)
+                    .addAnnotatedClass(MaritalStatus.class)
+                    .addAnnotatedClass(BloodType.class)
+                    .addAnnotatedClass(DoctorSpecialization.class)
                     .addAnnotatedClass(HospitalServiceCategory.class)
                     .addAnnotatedClass(HospitalService.class)
-                    .addAnnotatedClass(ContactInformation.class)
                     .addAnnotatedClass(LifestyleDetails.class)
                     .addAnnotatedClass(MedicalDetails.class)
                     .addAnnotatedClass(BasicDetails.class)
@@ -54,7 +55,7 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-//    public static void shutdown() {
-//        getSessionFactory().close();
-//    }
+    public static void shutdown() {
+        getSessionFactory().close();
+    }
 }

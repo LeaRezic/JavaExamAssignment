@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="EmergencyRegistration"
     ,schema="dbo"
-    ,catalog="OutpatientManagement"
+    ,catalog="VirgoHospitals"
 )
 public class EmergencyRegistration  implements java.io.Serializable {
 

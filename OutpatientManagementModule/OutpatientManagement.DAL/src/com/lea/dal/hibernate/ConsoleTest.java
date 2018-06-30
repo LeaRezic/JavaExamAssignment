@@ -15,12 +15,13 @@ import java.util.List;
  */
 public class ConsoleTest {
     public static void main(String[] args) {
+        
         List<Doctor> doctors = new ArrayList<Doctor>();
         DatabaseRepository repo = new DatabaseRepository();
         doctors = repo.getAllDoctors();
         doctors.forEach(d->System.out.println(d.getBasicDetails().getFirstName() + " " + d.getBasicDetails().getLastName()));
         
-        
+        HibernateUtil.shutdown();
     }
     
     

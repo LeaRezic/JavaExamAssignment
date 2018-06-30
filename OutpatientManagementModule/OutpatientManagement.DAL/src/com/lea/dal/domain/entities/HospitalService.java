@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="HospitalService"
     ,schema="dbo"
-    ,catalog="OutpatientManagement"
+    ,catalog="VirgoHospitals"
 )
 public class HospitalService  implements java.io.Serializable {
 

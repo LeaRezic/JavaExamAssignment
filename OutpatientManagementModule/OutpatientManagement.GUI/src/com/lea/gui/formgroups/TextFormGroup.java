@@ -16,14 +16,14 @@ public class TextFormGroup extends FormGroup {
 
     public JTextField textField;
     
-    public TextFormGroup(String labelText) {
-        super(labelText);
+    public TextFormGroup(String labelText, Boolean isMandatory) {
+        super(labelText, isMandatory);
         textField = new JTextField();
     }
 
     @Override
     public Boolean isValid() {
-        return !textField.getText().trim().isEmpty();
+        return !isMandatory || !textField.getText().trim().isEmpty();
     }
 
     @Override
