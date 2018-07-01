@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 package com.lea.dal.hibernate;
-
-import com.lea.dal.domain.entities.*;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -17,45 +15,22 @@ import org.hibernate.SessionFactory;
  */
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration()
-                    .configure()
-                    .addAnnotatedClass(Country.class)
-                    .addAnnotatedClass(City.class)
-                    .addAnnotatedClass(MaritalStatus.class)
-                    .addAnnotatedClass(BloodType.class)
-                    .addAnnotatedClass(DoctorSpecialization.class)
-                    .addAnnotatedClass(HospitalServiceCategory.class)
-                    .addAnnotatedClass(HospitalService.class)
-                    .addAnnotatedClass(LifestyleDetails.class)
-                    .addAnnotatedClass(MedicalDetails.class)
-                    .addAnnotatedClass(BasicDetails.class)
-                    .addAnnotatedClass(PersonalDetails.class)
-                    .addAnnotatedClass(ComplaintDetails.class)
-                    .addAnnotatedClass(Doctor.class)
-                    .addAnnotatedClass(Patient.class)
-                    .addAnnotatedClass(Appointment.class)
-                    .addAnnotatedClass(AppointmentService.class)
-                    .addAnnotatedClass(EmergencyRegistration.class)
-                    .addAnnotatedClass(Receipt.class)
-                    .buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    private HibernateUtil(){
     }
 
-    public static SessionFactory getSessionFactory() {
+    public static synchronized SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            sessionFactory = new Configuration().configure("hibernate.cfg.xml").
+                    buildSessionFactory();
+        }
         return sessionFactory;
     }
 
     public static void shutdown() {
-        getSessionFactory().close();
+        if (sessionFactory != null) {
+            getSessionFactory().close();
+        }
     }
 }

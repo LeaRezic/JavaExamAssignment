@@ -16,8 +16,8 @@ public class TextFormGroup extends FormGroup {
 
     public JTextField textField;
     
-    public TextFormGroup(String labelText, Boolean isMandatory) {
-        super(labelText, isMandatory);
+    public TextFormGroup(String labelText) {
+        super(labelText);
         textField = new JTextField();
     }
 

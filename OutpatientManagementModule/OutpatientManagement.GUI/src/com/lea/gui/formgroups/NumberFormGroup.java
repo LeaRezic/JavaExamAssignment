@@ -17,8 +17,8 @@ public class NumberFormGroup extends FormGroup {
     public JSpinner spinner;
     public int maxValue;
     
-    public NumberFormGroup(String labelText, Boolean isMandatory, int max) {
-        super(labelText, isMandatory);
+    public NumberFormGroup(String labelText, int max) {
+        super(labelText);
         maxValue = max;
         spinner = new JSpinner();
     }
@@ -30,7 +30,7 @@ public class NumberFormGroup extends FormGroup {
 
     @Override
     public String getErrorMessage() {
-        return super.label.getText() + " value must be under " + maxValue;
+        return super.label.getText() + " value must be under or equal to " + maxValue;
     }
 
     @Override

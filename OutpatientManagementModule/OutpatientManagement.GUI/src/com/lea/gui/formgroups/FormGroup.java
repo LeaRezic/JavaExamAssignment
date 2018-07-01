@@ -18,14 +18,18 @@ public abstract class FormGroup {
     public String errorMessage;
     public Boolean isMandatory;
 
-    public FormGroup(String labelText, Boolean isMandatory) {
+    public FormGroup(String labelText) {
         label = new JLabel(labelText);
-        this.isMandatory = isMandatory;
+        this.isMandatory = false;
     }
 
     public FormGroup(String labelText, String errorMessage) {
         label.setText(labelText);
         this.errorMessage = errorMessage;
+    }
+    
+    public void setIsMandatory(Boolean isMandatory) {
+        this.isMandatory = isMandatory;
     }
     
     public JLabel getLabel() {

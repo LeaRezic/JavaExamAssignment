@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -37,7 +38,7 @@ public abstract class ViewModelGuiBuilder {
     }
 
     public abstract void setFormGroups();
-    
+
     private void drawPanel() {
         panel.setBorder(BorderFactory.createTitledBorder(title));
         panel.setPreferredSize(new Dimension(width, height));
@@ -45,15 +46,18 @@ public abstract class ViewModelGuiBuilder {
         panel.setLayout(layout);
         panel.setOpaque(true);
         GridBagConstraints c = new GridBagConstraints();
-        c.weightx = .8;
-        c.weighty = .5;
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.weighty = .5;
         c.insets = new Insets(5, 20, 5, 20);
         c.gridx = 0;
         c.gridy = 0;
         for (FormGroup formGroup : formGroups) {
+//            formGroup.getLabel().setPreferredSize(new Dimension(60, 30));
+//            formGroup.getLabel().setAlignmentY(SwingConstants.RIGHT);
+            c.weightx = 0;
             panel.add(formGroup.getLabel(), c);
             c.gridx++;
+            c.weightx = 1;
             panel.add(formGroup.getComponent(), c);
             c.gridy++;
             c.gridx = 0;
@@ -78,7 +82,7 @@ public abstract class ViewModelGuiBuilder {
         }
         return true;
     }
-    
+
     public String getErrorMessage() {
         String message = "";
         for (FormGroup formGroup : formGroups) {
@@ -88,5 +92,5 @@ public abstract class ViewModelGuiBuilder {
         }
         return message;
     }
-    
+
 }

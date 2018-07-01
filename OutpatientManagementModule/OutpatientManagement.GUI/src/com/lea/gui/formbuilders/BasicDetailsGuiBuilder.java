@@ -24,38 +24,71 @@ public class BasicDetailsGuiBuilder extends ViewModelGuiBuilder {
     public ViewModel basicDetails;
     
     public BasicDetailsGuiBuilder() {
-        super("Basic Details", 400, 200);
+        super("Basic Details", 400, 400);
         formGroups = new ArrayList<>();
         basicDetails = new BasicDetailsVM();
     }
     
     public BasicDetailsGuiBuilder(String title) {
-        super(title, 400, 200);
+        super(title, 400, 400);
         formGroups = new ArrayList<>();
         basicDetails = new BasicDetailsVM();
     }
 
     @Override
     public void setFormGroups() {
-        FormGroup firstName = new TextFormGroup("First Name", true);
+        FormGroup firstName = new TextFormGroup("First name");
+        firstName.setIsMandatory(true);
         formGroups.add(firstName);
-        FormGroup middleName = new TextFormGroup("Middle Name", false);
+        
+        FormGroup middleName = new TextFormGroup("Middle name");
         formGroups.add(middleName);
-        FormGroup lastName = new TextFormGroup("Last Name", true);
+        
+        FormGroup lastName = new TextFormGroup("Last name");
+        lastName.setIsMandatory(true);
         formGroups.add(lastName);
-        String[] options = {"F","M"};
-        FormGroup sex = new OptionFormGroup("Sex", true, Arrays.asList(options));
-        formGroups.add(sex);
-        String[] maritalStatus = {"Married","Single","Widowed"};
-        FormGroup married = new OptionFormGroup("Marital Status", true, Arrays.asList(maritalStatus));
-        formGroups.add(married);
-        FormGroup drinksPerDay = new NumberFormGroup("Drinks per day", true, 100);
-        formGroups.add(drinksPerDay);
+        
+        FormGroup fullStreet = new TextFormGroup("Full street");
+        fullStreet.setIsMandatory(true);
+        formGroups.add(fullStreet);
+        
+        FormGroup city = new TextFormGroup("City");
+        city.setIsMandatory(true);
+        formGroups.add(city);
+        
+        FormGroup zipCode = new TextFormGroup("ZIP code");
+        zipCode.setIsMandatory(true);
+        formGroups.add(zipCode);
+        
+        FormGroup country = new TextFormGroup("Country");
+        country.setIsMandatory(true);
+        formGroups.add(country);
+        
+        FormGroup telephone = new TextFormGroup("Telephone");
+        telephone.setIsMandatory(true);
+        formGroups.add(telephone);
+        
+        FormGroup mobilePhone = new TextFormGroup("Mobile phone");
+        formGroups.add(mobilePhone);
+        
+        FormGroup email = new TextFormGroup("E-mail");
+        formGroups.add(email);
+        
+//        String[] options = {"F","M"};
+//        FormGroup sex = new OptionFormGroup("Sex", Arrays.asList(options));
+//        formGroups.add(sex);
+//        
+//        String[] maritalStatus = {"Married","Single","Widowed"};
+//        FormGroup married = new OptionFormGroup("Marital Status", Arrays.asList(maritalStatus));
+//        formGroups.add(married);
+//        
+//        FormGroup drinksPerDay = new NumberFormGroup("Drinks per day", 100);
+//        formGroups.add(drinksPerDay);
     }
 
     @Override
     public void setModel(ViewModel viewModel) {
-        basicDetails = viewModel;
+        basicDetails = (BasicDetailsVM) viewModel;
     }
 
     @Override

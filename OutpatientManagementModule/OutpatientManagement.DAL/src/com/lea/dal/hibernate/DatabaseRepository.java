@@ -38,7 +38,7 @@ public class DatabaseRepository implements Repository {
         }
         return entityList;
     }
-    
+
     private EntityBase getEntityByIdOfType(String className, int id) {
         EntityBase entity = new EntityBase();
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -58,7 +58,11 @@ public class DatabaseRepository implements Repository {
         }
         return entity;
     }
-    
+
+    @Override
+    public Doctor getDoctorById(int id) {
+        return (Doctor) getEntityByIdOfType(Doctor.class.getSimpleName(), id);
+    }
     
     @Override
     public List<Doctor> getAllDoctors() {
@@ -80,10 +84,7 @@ public class DatabaseRepository implements Repository {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Doctor getDoctorById(int id) {
-        return (Doctor) getEntityByIdOfType(Doctor.class.getSimpleName(),id);
-    }
+    
 
     @Override
     public Boolean insertOrUpdateDoctor(Doctor d) {
@@ -117,7 +118,7 @@ public class DatabaseRepository implements Repository {
 
     @Override
     public EmergencyRegistration getEmergencyRegistrationById(int id) {
-        return (EmergencyRegistration) getEntityByIdOfType(EmergencyRegistration.class.getSimpleName(),id);
+        return (EmergencyRegistration) getEntityByIdOfType(EmergencyRegistration.class.getSimpleName(), id);
     }
 
     @Override
@@ -129,5 +130,69 @@ public class DatabaseRepository implements Repository {
     public List<HospitalService> getAllHospitalServices() {
         return (List<HospitalService>) getAllEntitiesOfType(HospitalService.class.getSimpleName());
     }
+
+//    private int insertEntity(EntityBase entity) {
+//        int newId = -1;
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Transaction tx = null;
+//        try {
+//            tx = session.beginTransaction();
+//            newId = (int) session.save(entity);
+//            tx.commit();
+//        } catch (HibernateException ex) {
+//            if (tx != null) {
+//                tx.rollback();
+//            }
+//            ex.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+//        return newId;
+//    }
     
+    private void insertEntity(EntityBase entity) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.save(entity);
+            tx.commit();
+        } catch (HibernateException ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
+    private void updateEntity(EntityBase entity) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.update(entity);
+            tx.commit();
+        } catch (HibernateException ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void insertOrUpdateComplaintDetails(ComplaintDetails cd) {
+
+        if (cd.getIdcomplaintDetails() == 0) {
+            insertEntity(cd);
+        } else {
+            updateEntity(cd);
+        }
+        
+    }
+
 }

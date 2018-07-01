@@ -33,6 +33,7 @@ public interface Repository {
     public EmergencyRegistration getEmergencyRegistrationById(int id);
     public List<EmergencyRegistration> getAllEmeregencyRegistrations();
     
+    public void insertOrUpdateComplaintDetails(ComplaintDetails cd);
     
 
 }
