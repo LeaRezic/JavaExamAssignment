@@ -36,6 +36,8 @@ public abstract class FormGroup {
         return label;
     }
 
+    public abstract void setValue(Object value);
+    
     public abstract JComponent getComponent();
     
     public abstract Object getValue();

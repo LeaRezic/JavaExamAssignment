@@ -25,7 +25,6 @@ public class MedicalDetails extends EntityBase implements java.io.Serializable {
 
 
      private int idmedicalDetails;
-     private String surgeriesHistory;
      private String allergiesCondition;
      private String diabeticCondition;
      private String hypertensiveCondition;
@@ -43,9 +42,8 @@ public class MedicalDetails extends EntityBase implements java.io.Serializable {
     public MedicalDetails(int idmedicalDetails) {
         this.idmedicalDetails = idmedicalDetails;
     }
-    public MedicalDetails(int idmedicalDetails, String surgeriesHistory, String allergiesCondition, String diabeticCondition, String hypertensiveCondition, String cardiacCondition, String respiratoryCondition, String digestiveCondition, String muscularCondition, String neurologicalCondition, Set<Patient> patients) {
+    public MedicalDetails(int idmedicalDetails, String allergiesCondition, String diabeticCondition, String hypertensiveCondition, String cardiacCondition, String respiratoryCondition, String digestiveCondition, String muscularCondition, String neurologicalCondition, Set<Patient> patients) {
        this.idmedicalDetails = idmedicalDetails;
-       this.surgeriesHistory = surgeriesHistory;
        this.allergiesCondition = allergiesCondition;
        this.diabeticCondition = diabeticCondition;
        this.hypertensiveCondition = hypertensiveCondition;
@@ -66,17 +64,6 @@ public class MedicalDetails extends EntityBase implements java.io.Serializable {
     public void setIdmedicalDetails(int idmedicalDetails) {
         this.idmedicalDetails = idmedicalDetails;
     }
-
-    
-    @Column(name="SurgeriesHistory")
-    public String getSurgeriesHistory() {
-        return this.surgeriesHistory;
-    }
-    
-    public void setSurgeriesHistory(String surgeriesHistory) {
-        this.surgeriesHistory = surgeriesHistory;
-    }
-
     
     @Column(name="AllergiesCondition")
     public String getAllergiesCondition() {

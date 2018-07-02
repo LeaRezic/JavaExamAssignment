@@ -5,29 +5,33 @@
  */
 package com.lea.bll.viewmodels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Lea
  */
 public class DoctorVM extends ViewModel {
     
-    public enum DoctorSpecialization {
-        GENERAL_PHYSICIAN, ANESTESIOLOGIST, DERMATOLOGIST
-    }
+//    public enum DoctorSpecialization {
+//        GENERAL_PHYSICIAN, ANESTESIOLOGIST, DERMATOLOGIST
+//    }
     
     private int iddoctor;
      private BasicDetailsVM basicDetails;
-     private String title;
-     private boolean active;
+     private DoctorDetailsVM doctorDetails;
+     
+     private List<String> allSpecializations;
 
     public DoctorVM() {
+        allSpecializations = new ArrayList<>();
     }
 
-    public DoctorVM(int iddoctor, BasicDetailsVM basicDetails, String title, boolean active) {
+    public DoctorVM(int iddoctor, BasicDetailsVM basicDetails, DoctorDetailsVM doctorDetails) {
         this.iddoctor = iddoctor;
         this.basicDetails = basicDetails;
-        this.title = title;
-        this.active = active;
+        this.doctorDetails = doctorDetails;
     }
 
     public int getIddoctor() {
@@ -46,26 +50,27 @@ public class DoctorVM extends ViewModel {
         this.basicDetails = basicDetails;
     }
 
-    public String getTitle() {
-        return title;
+    public DoctorDetailsVM getDoctorDetails() {
+        return doctorDetails;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDoctorDetails(DoctorDetailsVM doctorDetails) {
+        this.doctorDetails = doctorDetails;
+    }
+    
+    public List<String> getAllSpecializations() {
+        return allSpecializations;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setAllSpecializations(List<String> allSpecializations) {
+        this.allSpecializations = allSpecializations;
     }
 
     @Override
     public String toString() {
-        return title + " " + basicDetails.getFirstName() + " " + basicDetails.getLastName();
+        return doctorDetails.getTitle() + " " + basicDetails.getLastName() + " (" + doctorDetails.getProfession() + ")";
     }
+    
     
     
     

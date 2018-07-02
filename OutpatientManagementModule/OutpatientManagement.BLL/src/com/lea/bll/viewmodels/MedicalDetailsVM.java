@@ -11,7 +11,6 @@ package com.lea.bll.viewmodels;
  */
 public class MedicalDetailsVM extends ViewModel {
     private int idmedicalDetails;
-     private String surgeriesHistory;
      private String allergiesCondition;
      private String diabeticCondition;
      private String hypertensiveCondition;
@@ -24,9 +23,8 @@ public class MedicalDetailsVM extends ViewModel {
     public MedicalDetailsVM() {
     }
 
-    public MedicalDetailsVM(int idmedicalDetails, String surgeriesHistory, String allergiesCondition, String diabeticCondition, String hypertensiveCondition, String cardiacCondition, String respiratoryCondition, String digestiveCondition, String muscularCondition, String neurologicalCondition) {
+    public MedicalDetailsVM(int idmedicalDetails, String allergiesCondition, String diabeticCondition, String hypertensiveCondition, String cardiacCondition, String respiratoryCondition, String digestiveCondition, String muscularCondition, String neurologicalCondition) {
         this.idmedicalDetails = idmedicalDetails;
-        this.surgeriesHistory = surgeriesHistory;
         this.allergiesCondition = allergiesCondition;
         this.diabeticCondition = diabeticCondition;
         this.hypertensiveCondition = hypertensiveCondition;
@@ -43,14 +41,6 @@ public class MedicalDetailsVM extends ViewModel {
 
     public void setIdmedicalDetails(int idmedicalDetails) {
         this.idmedicalDetails = idmedicalDetails;
-    }
-
-    public String getSurgeriesHistory() {
-        return surgeriesHistory;
-    }
-
-    public void setSurgeriesHistory(String surgeriesHistory) {
-        this.surgeriesHistory = surgeriesHistory;
     }
 
     public String getAllergiesCondition() {

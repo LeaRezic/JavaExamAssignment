@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 public class TextFormGroup extends FormGroup {
 
     public JTextField textField;
-    
+
     public TextFormGroup(String labelText) {
         super(labelText);
         textField = new JTextField();
@@ -40,5 +40,10 @@ public class TextFormGroup extends FormGroup {
     public Object getValue() {
         return textField.getText();
     }
-    
+
+    @Override
+    public void setValue(Object value) {
+        textField.setText((String) value);
+    }
+
 }

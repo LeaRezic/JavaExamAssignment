@@ -13,30 +13,26 @@ import java.util.Date;
  */
 public class PatientVM extends ViewModel {
     private int idpatient;
-     private BasicDetailsVM basicDetailsByNextOfKinId;
-     private BasicDetailsVM basicDetailsByBasicDetailsId;
-     private ComplaintDetailsVM complaintDetails;
-     private LifestyleDetailsVM lifestyleDetails;
-     private MedicalDetailsVM medicalDetails;
-     private PersonalDetailsVM personalDetails;
-     private String opid;
-     private Date fullRegistrationDate;
-     private String nextOfKinRelationship;
+    private PatientDetailsVM patientDetails;
+    private BasicDetailsVM basicDetailsByNextOfKinId;
+    private BasicDetailsVM basicDetailsByBasicDetailsId;
+    private ComplaintDetailsVM complaintDetails;
+    private LifestyleDetailsVM lifestyleDetails;
+    private MedicalDetailsVM medicalDetails;
+    private PersonalDetailsVM personalDetails;
 
     public PatientVM() {
     }
 
-    public PatientVM(int idpatient, BasicDetailsVM basicDetailsByNextOfKinId, BasicDetailsVM basicDetailsByBasicDetailsId, ComplaintDetailsVM complaintDetails, LifestyleDetailsVM lifestyleDetails, MedicalDetailsVM medicalDetails, PersonalDetailsVM personalDetails, String opid, Date fullRegistrationDate, String nextOfKinRelationship) {
+    public PatientVM(int idpatient, PatientDetailsVM patientDetails, BasicDetailsVM basicDetailsByNextOfKinId, BasicDetailsVM basicDetailsByBasicDetailsId, ComplaintDetailsVM complaintDetails, LifestyleDetailsVM lifestyleDetails, MedicalDetailsVM medicalDetails, PersonalDetailsVM personalDetails) {
         this.idpatient = idpatient;
+        this.patientDetails = patientDetails;
         this.basicDetailsByNextOfKinId = basicDetailsByNextOfKinId;
         this.basicDetailsByBasicDetailsId = basicDetailsByBasicDetailsId;
         this.complaintDetails = complaintDetails;
         this.lifestyleDetails = lifestyleDetails;
         this.medicalDetails = medicalDetails;
         this.personalDetails = personalDetails;
-        this.opid = opid;
-        this.fullRegistrationDate = fullRegistrationDate;
-        this.nextOfKinRelationship = nextOfKinRelationship;
     }
 
     public int getIdpatient() {
@@ -45,6 +41,14 @@ public class PatientVM extends ViewModel {
 
     public void setIdpatient(int idpatient) {
         this.idpatient = idpatient;
+    }
+
+    public PatientDetailsVM getPatientDetails() {
+        return patientDetails;
+    }
+
+    public void setPatientDetails(PatientDetailsVM patientDetails) {
+        this.patientDetails = patientDetails;
     }
 
     public BasicDetailsVM getBasicDetailsByNextOfKinId() {
@@ -95,29 +99,4 @@ public class PatientVM extends ViewModel {
         this.personalDetails = personalDetails;
     }
 
-    public String getOpid() {
-        return opid;
-    }
-
-    public void setOpid(String opid) {
-        this.opid = opid;
-    }
-
-    public Date getFullRegistrationDate() {
-        return fullRegistrationDate;
-    }
-
-    public void setFullRegistrationDate(Date fullRegistrationDate) {
-        this.fullRegistrationDate = fullRegistrationDate;
-    }
-
-    public String getNextOfKinRelationship() {
-        return nextOfKinRelationship;
-    }
-
-    public void setNextOfKinRelationship(String nextOfKinRelationship) {
-        this.nextOfKinRelationship = nextOfKinRelationship;
-    }
-     
-     
 }

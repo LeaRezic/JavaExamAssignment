@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.lea.gui.formbuilders;
+package com.lea.gui.panelbuilders;
 
 import com.lea.bll.viewmodels.ViewModel;
 import com.lea.gui.formgroups.FormGroup;
@@ -15,13 +15,12 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
  *
  * @author Lea
  */
-public abstract class ViewModelGuiBuilder {
+public abstract class ViewModelPanelBuilder {
 
     public String title;
     public List<FormGroup> formGroups;
@@ -29,7 +28,7 @@ public abstract class ViewModelGuiBuilder {
     public int width;
     public int height;
 
-    public ViewModelGuiBuilder(String title, int width, int height) {
+    public ViewModelPanelBuilder(String title, int width, int height) {
         this.title = title;
         panel = new JPanel();
         this.width = width;
@@ -52,8 +51,6 @@ public abstract class ViewModelGuiBuilder {
         c.gridx = 0;
         c.gridy = 0;
         for (FormGroup formGroup : formGroups) {
-//            formGroup.getLabel().setPreferredSize(new Dimension(60, 30));
-//            formGroup.getLabel().setAlignmentY(SwingConstants.RIGHT);
             c.weightx = 0;
             panel.add(formGroup.getLabel(), c);
             c.gridx++;
@@ -91,6 +88,13 @@ public abstract class ViewModelGuiBuilder {
             }
         }
         return message;
+    }
+    
+    public int getNumberOfFormGroups() {
+        if (formGroups != null) {
+            return formGroups.size();
+        }
+        return 0;
     }
 
 }

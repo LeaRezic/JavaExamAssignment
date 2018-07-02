@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.lea.gui.formbuilders;
+package com.lea.gui.panelbuilders;
 
 import com.lea.bll.viewmodels.ComplaintDetailsVM;
 import com.lea.bll.viewmodels.ViewModel;
@@ -14,14 +14,14 @@ import com.lea.gui.formgroups.TextFormGroup;
  *
  * @author Lea
  */
-public class ComplaintDetailsGuiBuilder extends ViewModelGuiBuilder {
+public class ComplaintDetailsPanelBuilder extends ViewModelPanelBuilder {
 
     private ComplaintDetailsVM viewModel;
     private FormGroup complaint;
     private FormGroup treatmentHistory;
     private FormGroup treatedAtHospital;
 
-    public ComplaintDetailsGuiBuilder() {
+    public ComplaintDetailsPanelBuilder() {
         super("Complaint details", 400, 200);
     }
 

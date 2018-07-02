@@ -26,6 +26,8 @@ public interface Repository {
     public List<DoctorSpecialization> getAllDoctorSpecializations();
     public List<BloodType> getAllBloodTypes();
     public List<HospitalService> getAllHospitalServices();
+    public List<City> getAllCities();
+    public List<Country> getAllCountries();
 
     public List<Appointment> getAllAppointments();
     public Boolean insertOrUpdateAppointment();

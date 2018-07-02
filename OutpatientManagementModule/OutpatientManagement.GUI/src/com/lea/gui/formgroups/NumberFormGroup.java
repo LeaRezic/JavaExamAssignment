@@ -42,5 +42,10 @@ public class NumberFormGroup extends FormGroup {
     public Object getValue() {
         return spinner.getValue();
     }
+
+    @Override
+    public void setValue(Object value) {
+        spinner.setValue((int) value);
+    }
     
 }

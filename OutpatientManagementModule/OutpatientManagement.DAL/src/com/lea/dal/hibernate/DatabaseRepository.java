@@ -88,7 +88,14 @@ public class DatabaseRepository implements Repository {
 
     @Override
     public Boolean insertOrUpdateDoctor(Doctor d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if (d.getIddoctor() == 0) {
+            int basicDetailsId = insertEntity(d.getBasicDetails());
+            d.setBasicDetails((BasicDetails) getEntityByIdOfType(BasicDetails.class.getSimpleName(),basicDetailsId));
+            insertEntity(d);
+        }
+        return true;
+        
     }
 
     @Override
@@ -150,12 +157,13 @@ public class DatabaseRepository implements Repository {
 //        return newId;
 //    }
     
-    private void insertEntity(EntityBase entity) {
+    private int insertEntity(EntityBase entity) {
+        int newId = -1;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(entity);
+            newId = (int) session.save(entity);
             tx.commit();
         } catch (HibernateException ex) {
             if (tx != null) {
@@ -165,6 +173,7 @@ public class DatabaseRepository implements Repository {
         } finally {
             session.close();
         }
+        return newId;
     }
     
     private void updateEntity(EntityBase entity) {
@@ -193,6 +202,16 @@ public class DatabaseRepository implements Repository {
             updateEntity(cd);
         }
         
+    }
+
+    @Override
+    public List<City> getAllCities() {
+        return (List<City>) getAllEntitiesOfType(City.class.getSimpleName());
+    }
+
+    @Override
+    public List<Country> getAllCountries() {
+        return (List<Country>) getAllEntitiesOfType(Country.class.getSimpleName());
     }
 
 }

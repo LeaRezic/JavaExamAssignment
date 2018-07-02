@@ -22,13 +22,17 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
-        
+        DoctorManager doctorManager = new DoctorManager();
         List<DoctorVM> doctors = new ArrayList<DoctorVM>();
-        doctors = new DoctorManager().getAll();
+        doctors = doctorManager.getAll();
         for (DoctorVM doctor : doctors) {
             System.out.println(doctor.toString());
         }
+        
+        DoctorVM secondDoctor = doctorManager.getById(2);
+        System.out.println(secondDoctor.toString());
         
 //        BasicDetailsVM someonesDetails = new BasicDetailsManager().getById(10);
 //        System.out.println(someonesDetails.toString());

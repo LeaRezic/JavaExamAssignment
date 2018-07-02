@@ -5,7 +5,7 @@
  */
 package com.lea.bll.datamanagers;
 
-import com.lea.bll.viewmodels.BasicDetailsVM;
+import com.lea.bll.viewmodels.DoctorDetailsVM;
 import com.lea.bll.viewmodels.DoctorVM;
 import com.lea.dal.domain.entities.Doctor;
 import java.util.ArrayList;
@@ -17,30 +17,63 @@ import java.util.List;
  */
 public final class DoctorManager extends DataManager {
 
+    private final BasicDetailsManager basicDetailsManager;
+
     public DoctorManager() {
+        basicDetailsManager = new BasicDetailsManager();
+    }
+    
+    public DoctorVM getById(int id) {
+        return convertEntityToViewModel(repository.getDoctorById(id));
+    }
+
+    public DoctorVM createNew() {
+        DoctorVM viewModel = new DoctorVM();
+        viewModel.setIddoctor(0);
+        viewModel.setBasicDetails(basicDetailsManager.createNew());
+        viewModel.setDoctorDetails(new DoctorDetailsVM());
+        repository.getAllDoctorSpecializations().forEach(s -> viewModel.getDoctorDetails().getAllSpecializations().add(s.getName()));
+        //viewModel.setAllSpecializations(repository.getAllDoctorSpecializations());
+        return viewModel;
+    }
+
+    // tu bi trebalo nešto sredit da repo vrati boolean, da se to iskoristi
+    public void saveChanges(DoctorVM viewModel) {
+        repository.insertOrUpdateDoctor(convertFromViewModelToEntity(viewModel));
     }
 
     public List<DoctorVM> getAll() {
         List<DoctorVM> doctors = new ArrayList<>();
-        for (Doctor entity : repository.getAllDoctors()) {
+        repository.getAllDoctors().forEach((entity) -> {
             doctors.add(convertEntityToViewModel(entity));
-        }
+        });
         return doctors;
     }
 
     protected DoctorVM convertEntityToViewModel(Doctor entity) {
-        DoctorVM viewModel = new DoctorVM();
+        DoctorVM viewModel = createNew();
         viewModel.setIddoctor(entity.getIddoctor());
-        viewModel.setTitle(entity.getTitle());
-        viewModel.setActive(entity.isActive());
-
-        BasicDetailsVM basicDetails = new BasicDetailsVM();
-        basicDetails.setFirstName(entity.getBasicDetails().getFirstName());
-        basicDetails.setLastName(entity.getBasicDetails().getLastName());
-        
-        viewModel.setBasicDetails(basicDetails);
+        viewModel.getDoctorDetails().setTitle(entity.getTitle());
+        viewModel.getDoctorDetails().setProfession(entity.getDoctorSpecialization().getName());
+        viewModel.getDoctorDetails().setActive(entity.isActive());
+        viewModel.setBasicDetails(basicDetailsManager.convertFromEntityToViewModel(entity.getBasicDetails()));
         return viewModel;
+    }
 
+    public Doctor convertFromViewModelToEntity(DoctorVM viewModel) {
+        Doctor entity = new Doctor();
+        entity.setIddoctor(viewModel.getIddoctor());
+        entity.setBasicDetails(basicDetailsManager.convertFromViewModelToEntity(viewModel.getBasicDetails()));
+        entity.setActive(viewModel.getDoctorDetails().isActive());
+        entity.setTitle(viewModel.getDoctorDetails().getTitle());
+
+        repository.getAllDoctorSpecializations()
+                .stream()
+                .filter(s -> s.getName().equals(viewModel.getDoctorDetails().getProfession()))
+                .findFirst()
+                .ifPresent(s -> entity.setDoctorSpecialization(s));
+
+        return entity;
     }
 
 }

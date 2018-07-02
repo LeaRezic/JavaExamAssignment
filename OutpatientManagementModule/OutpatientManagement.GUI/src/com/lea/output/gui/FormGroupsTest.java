@@ -8,9 +8,9 @@ package com.lea.output.gui;
 import com.lea.bll.datamanagers.ComplaintDetailsManager;
 import com.lea.bll.viewmodels.ComplaintDetailsVM;
 import com.lea.dal.hibernate.HibernateUtil;
-import com.lea.gui.formbuilders.BasicDetailsGuiBuilder;
-import com.lea.gui.formbuilders.ComplaintDetailsGuiBuilder;
-import com.lea.gui.formbuilders.ViewModelGuiBuilder;
+import com.lea.gui.panelbuilders.BasicDetailsPanelBuilder;
+import com.lea.gui.panelbuilders.ComplaintDetailsPanelBuilder;
+import com.lea.gui.panelbuilders.ViewModelPanelBuilder;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,7 @@ public class FormGroupsTest extends JFrame {
     private JButton btnAdd;
 //    private ViewModelGuiBuilder panelPatient;
 //    private ViewModelGuiBuilder panelNextOfKin;
-    private ViewModelGuiBuilder panelComplaintDetails;
+    private ViewModelPanelBuilder panelComplaintDetails;
     private ComplaintDetailsManager dataManager;
 
     public FormGroupsTest() {
@@ -70,7 +70,7 @@ public class FormGroupsTest extends JFrame {
         btnAdd = new JButton();
 //        panelPatient = new BasicDetailsGuiBuilder("Patient");
 //        panelNextOfKin = new BasicDetailsGuiBuilder("Next of kin");
-        panelComplaintDetails = new ComplaintDetailsGuiBuilder();
+        panelComplaintDetails = new ComplaintDetailsPanelBuilder();
         dataManager = new ComplaintDetailsManager();
 
         btnAdd.addActionListener(new ActionListener() {

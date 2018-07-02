@@ -18,9 +18,11 @@ public class OptionFormGroup extends FormGroup {
 
     public JComboBox comboBox;
     private final DefaultComboBoxModel<String> comboModel;
+    private final List<String> options;
 
     public OptionFormGroup(String labelText, List<String> options) {
         super(labelText);
+        this.options = options;
         comboBox = new JComboBox();
         comboModel = new DefaultComboBoxModel<>();
         setComboBoxOptions(options);
@@ -43,6 +45,11 @@ public class OptionFormGroup extends FormGroup {
     @Override
     public Object getValue() {
         return comboBox.getSelectedItem();
+    }
+
+    @Override
+    public void setValue(Object value) {
+        comboBox.setSelectedIndex(options.indexOf((String) value));
     }
 
 }

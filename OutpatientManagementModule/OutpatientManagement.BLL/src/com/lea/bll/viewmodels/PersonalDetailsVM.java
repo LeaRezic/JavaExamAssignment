@@ -5,7 +5,11 @@
  */
 package com.lea.bll.viewmodels;
 
+import com.lea.dal.domain.entities.BloodType;
+import com.lea.dal.domain.entities.MaritalStatus;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -13,31 +17,40 @@ import java.util.Date;
  */
 public class PersonalDetailsVM extends ViewModel {
 
-    public enum MaritalStatus {
-        MARRIED, SINGLE, DIVORCED, WIDOWED, CIVIL_PARTNERSHIP
-    }
+//    public enum MaritalStatus {
+//        MARRIED, SINGLE, DIVORCED, WIDOWED, CIVIL_PARTNERSHIP
+//    }
+//    
+//    public enum BloodType {
+//        A_PLUS, A_MINUS, B_PLUS, B_MINUS, AB_PLUS, AB_MINUS, ZERO_PLUS, ZERO_MINUS
+//    }
     
-    public enum BloodType {
-        A_PLUS, A_MINUS, B_PLUS, B_MINUS, AB_PLUS, AB_MINUS, ZERO_PLUS, ZERO_MINUS
+    public enum Sex {
+        F, M
     }
 
     private int idpersonalDetails;
     private String bloodType;
     private String maritalStatus;
-    private Boolean sex;
+    private Sex sex;
     private Date dateOfBirth;
     private String occupation;
     private Double height;
     private Double weight;
+    
+    private List<BloodType> allBloodTypes;
+    private List<MaritalStatus> allMaritalStatus;
 
     public PersonalDetailsVM() {
+        allBloodTypes = new ArrayList<>();
+        allMaritalStatus = new ArrayList<>();
     }
 
     public PersonalDetailsVM(int idpersonalDetails) {
         this.idpersonalDetails = idpersonalDetails;
     }
 
-    public PersonalDetailsVM(int idpersonalDetails, String bloodType, String maritalStatus, Boolean sex, Date dateOfBirth, String occupation, Double height, Double weight) {
+    public PersonalDetailsVM(int idpersonalDetails, String bloodType, String maritalStatus, Sex sex, Date dateOfBirth, String occupation, Double height, Double weight) {
         this.idpersonalDetails = idpersonalDetails;
         this.bloodType = bloodType;
         this.maritalStatus = maritalStatus;
@@ -47,6 +60,24 @@ public class PersonalDetailsVM extends ViewModel {
         this.height = height;
         this.weight = weight;
     }
+
+    public List<BloodType> getAllBloodTypes() {
+        return allBloodTypes;
+    }
+
+    public void setAllBloodTypes(List<BloodType> allBloodTypes) {
+        this.allBloodTypes = allBloodTypes;
+    }
+
+    public List<MaritalStatus> getAllMaritalStatus() {
+        return allMaritalStatus;
+    }
+
+    public void setAllMaritalStatus(List<MaritalStatus> allMaritalStatus) {
+        this.allMaritalStatus = allMaritalStatus;
+    }
+    
+    
 
     public int getIdpersonalDetails() {
         return this.idpersonalDetails;
@@ -72,11 +103,11 @@ public class PersonalDetailsVM extends ViewModel {
         this.maritalStatus = maritalStatus;
     }
 
-    public Boolean getSex() {
+    public Sex getSex() {
         return this.sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
