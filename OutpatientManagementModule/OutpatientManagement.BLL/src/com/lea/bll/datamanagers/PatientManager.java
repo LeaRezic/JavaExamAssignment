@@ -28,8 +28,7 @@ public class PatientManager extends DataManager {
     }
     
     public PatientVM createNew() {
-        PatientVM viewModel = new PatientVM();
-        viewModel.setIdpatient(0);
+        PatientVM viewModel = new PatientVM(0);
         viewModel.setBasicDetailsByBasicDetailsId(basicDetailsManager.createNew());
         viewModel.setBasicDetailsByNextOfKinId(basicDetailsManager.createNew());
         viewModel.setComplaintDetails(complaintDetailsManager.createNew());

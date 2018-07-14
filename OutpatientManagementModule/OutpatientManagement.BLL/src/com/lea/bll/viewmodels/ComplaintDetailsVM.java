@@ -10,27 +10,19 @@ package com.lea.bll.viewmodels;
  * @author Lea
  */
 public class ComplaintDetailsVM extends ViewModel {
-     private int idcomplaintDetails;
      private String complaint;
      private String treatmentHistory;
      private String treatedAtHospital;
 
-    public ComplaintDetailsVM() {
+    public ComplaintDetailsVM(int id) {
+        super(id);
     }
 
     public ComplaintDetailsVM(int idcomplaintDetails, String complaint, String treatmentHistory, String treatedAtHospital) {
-        this.idcomplaintDetails = idcomplaintDetails;
+        super(idcomplaintDetails);
         this.complaint = complaint;
         this.treatmentHistory = treatmentHistory;
         this.treatedAtHospital = treatedAtHospital;
-    }
-
-    public int getIdcomplaintDetails() {
-        return idcomplaintDetails;
-    }
-
-    public void setIdcomplaintDetails(int idcomplaintDetails) {
-        this.idcomplaintDetails = idcomplaintDetails;
     }
 
     public String getComplaint() {

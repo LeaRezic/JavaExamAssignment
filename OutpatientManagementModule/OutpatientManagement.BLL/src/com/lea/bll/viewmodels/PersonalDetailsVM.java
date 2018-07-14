@@ -29,7 +29,6 @@ public class PersonalDetailsVM extends ViewModel {
         F, M
     }
 
-    private int idpersonalDetails;
     private String bloodType;
     private String maritalStatus;
     private Sex sex;
@@ -41,17 +40,14 @@ public class PersonalDetailsVM extends ViewModel {
     private List<BloodType> allBloodTypes;
     private List<MaritalStatus> allMaritalStatus;
 
-    public PersonalDetailsVM() {
+    public PersonalDetailsVM(int id) {
+        super(id);
         allBloodTypes = new ArrayList<>();
         allMaritalStatus = new ArrayList<>();
     }
 
-    public PersonalDetailsVM(int idpersonalDetails) {
-        this.idpersonalDetails = idpersonalDetails;
-    }
-
     public PersonalDetailsVM(int idpersonalDetails, String bloodType, String maritalStatus, Sex sex, Date dateOfBirth, String occupation, Double height, Double weight) {
-        this.idpersonalDetails = idpersonalDetails;
+        super(idpersonalDetails);
         this.bloodType = bloodType;
         this.maritalStatus = maritalStatus;
         this.sex = sex;
@@ -75,16 +71,6 @@ public class PersonalDetailsVM extends ViewModel {
 
     public void setAllMaritalStatus(List<MaritalStatus> allMaritalStatus) {
         this.allMaritalStatus = allMaritalStatus;
-    }
-    
-    
-
-    public int getIdpersonalDetails() {
-        return this.idpersonalDetails;
-    }
-
-    public void setIdpersonalDetails(int idpersonalDetails) {
-        this.idpersonalDetails = idpersonalDetails;
     }
 
     public String getBloodType() {

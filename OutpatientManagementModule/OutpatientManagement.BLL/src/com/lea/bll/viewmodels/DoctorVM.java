@@ -18,29 +18,35 @@ public class DoctorVM extends ViewModel {
 //        GENERAL_PHYSICIAN, ANESTESIOLOGIST, DERMATOLOGIST
 //    }
     
-    private int iddoctor;
      private BasicDetailsVM basicDetails;
      private DoctorDetailsVM doctorDetails;
+     private int professionId;
      
-     private List<String> allSpecializations;
+     //private List<String> allSpecializations;
 
-    public DoctorVM() {
-        allSpecializations = new ArrayList<>();
+    public DoctorVM(int iddoctor) {
+        super(iddoctor);
+        this.basicDetails = new BasicDetailsVM(0);
+        this.doctorDetails = new DoctorDetailsVM();
+        //allSpecializations = new ArrayList<>();
     }
 
-    public DoctorVM(int iddoctor, BasicDetailsVM basicDetails, DoctorDetailsVM doctorDetails) {
-        this.iddoctor = iddoctor;
+    public DoctorVM(int iddoctor, BasicDetailsVM basicDetails, DoctorDetailsVM doctorDetails, int professionId) {
+        super(iddoctor);
         this.basicDetails = basicDetails;
         this.doctorDetails = doctorDetails;
+        this.professionId = professionId;
     }
 
-    public int getIddoctor() {
-        return iddoctor;
+    public int getProfessionId() {
+        return professionId;
     }
 
-    public void setIddoctor(int iddoctor) {
-        this.iddoctor = iddoctor;
+    public void setProfessionId(int professionId) {
+        this.professionId = professionId;
     }
+    
+    
 
     public BasicDetailsVM getBasicDetails() {
         return basicDetails;
@@ -58,17 +64,17 @@ public class DoctorVM extends ViewModel {
         this.doctorDetails = doctorDetails;
     }
     
-    public List<String> getAllSpecializations() {
-        return allSpecializations;
-    }
-
-    public void setAllSpecializations(List<String> allSpecializations) {
-        this.allSpecializations = allSpecializations;
-    }
+//    public List<String> getAllSpecializations() {
+//        return allSpecializations;
+//    }
+//
+//    public void setAllSpecializations(List<String> allSpecializations) {
+//        this.allSpecializations = allSpecializations;
+    //}
 
     @Override
     public String toString() {
-        return doctorDetails.getTitle() + " " + basicDetails.getLastName() + " (" + doctorDetails.getProfession() + ")";
+        return doctorDetails.getTitle() + " " + basicDetails.getLastName();
     }
     
     

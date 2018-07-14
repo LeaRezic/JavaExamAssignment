@@ -18,25 +18,19 @@ public class BasicDetailsManager extends DataManager {
 //        return convertFromEntityToViewModel(repository.getBasicDetailsById(id));
 //    }
     public BasicDetailsVM createNew() {
-        BasicDetailsVM viewModel = new BasicDetailsVM();
-        viewModel.setIdbasicDetails(0);
-//        viewModel.setAllCities(repository.getAllCities());
-//        viewModel.setAllCountries(repository.getAllCountries());
-        repository.getAllCities().forEach(c -> viewModel.getAllCities().add(c.getName()));
-        repository.getAllCountries().forEach(c -> viewModel.getAllCountries().add(c.getName()));
+        BasicDetailsVM viewModel = new BasicDetailsVM(0);
         return viewModel;
     }
 
     public BasicDetailsVM convertFromEntityToViewModel(BasicDetails entity) {
         // stvori novi
-        BasicDetailsVM viewModel = createNew();
+        BasicDetailsVM viewModel = new BasicDetailsVM(entity.getIdbasicDetails());
         // setira sve
-        viewModel.setIdbasicDetails(entity.getIdbasicDetails());
         viewModel.setFirstName(entity.getFirstName());
         viewModel.setMiddleName(entity.getMiddleName());
         viewModel.setLastName(entity.getLastName());
-        viewModel.setCityName(entity.getCity().getName());
-        viewModel.setCountryName(entity.getCity().getCountry().getName());
+        viewModel.setCityId(entity.getCity().getIdcity());
+        viewModel.setCountryId(entity.getCity().getCountry().getIdcountry());
         viewModel.setFullStreet(entity.getFullStreet());
         viewModel.setPincode(entity.getPincode());
         viewModel.setTelephone(entity.getTelephone());
@@ -48,7 +42,7 @@ public class BasicDetailsManager extends DataManager {
 
     public BasicDetails convertFromViewModelToEntity(BasicDetailsVM viewModel) {
         BasicDetails entity = new BasicDetails();
-        entity.setIdbasicDetails(viewModel.getIdbasicDetails());
+        entity.setIdbasicDetails(viewModel.getId());
         entity.setFirstName(viewModel.getFirstName());
         entity.setMiddleName(viewModel.getMiddleName());
         entity.setLastName(viewModel.getLastName());
@@ -57,20 +51,23 @@ public class BasicDetailsManager extends DataManager {
         entity.setTelephone(viewModel.getTelephone());
         entity.setMobilePhone(viewModel.getMobilePhone());
         entity.setEmail(viewModel.getEmail());
+        
+        // za grad
+        entity.setCity(repository.getCityById(viewModel.getCityId()));
 
 //        entity.setCity(viewModel.getAllCities().stream().findFirst().get());
 //        entity.getCity().setCountry(viewModel.getAllCountries().stream().findFirst().get());
-        repository.getAllCities()
-                .stream()
-                .filter(c -> c.getName().equals(viewModel.getCityName()))
-                .findFirst()
-                .ifPresent(c -> entity.setCity(c));
-
-        repository.getAllCountries()
-                .stream()
-                .filter(c -> c.getName().equals(viewModel.getCountryName()))
-                .findFirst()
-                .ifPresent(c -> entity.getCity().setCountry(c));
+//        repository.getAllCities()
+//                .stream()
+//                .filter(c -> c.getName().equals(viewModel.getCityName()))
+//                .findFirst()
+//                .ifPresent(c -> entity.setCity(c));
+//
+//        repository.getAllCountries()
+//                .stream()
+//                .filter(c -> c.getName().equals(viewModel.getCountryName()))
+//                .findFirst()
+//                .ifPresent(c -> entity.getCity().setCountry(c));
 
         return entity;
     }

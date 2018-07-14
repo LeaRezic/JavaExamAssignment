@@ -15,8 +15,7 @@ import com.lea.dal.domain.entities.ComplaintDetails;
 public class ComplaintDetailsManager extends DataManager {
     
     public ComplaintDetailsVM createNew() {
-        ComplaintDetailsVM viewModel = new ComplaintDetailsVM();
-        viewModel.setIdcomplaintDetails(0);
+        ComplaintDetailsVM viewModel = new ComplaintDetailsVM(0);
         return viewModel;
     }
     
@@ -26,7 +25,7 @@ public class ComplaintDetailsManager extends DataManager {
     
     private ComplaintDetails convertFromViewModelToEntity(ComplaintDetailsVM viewModel) {
         ComplaintDetails entity = new ComplaintDetails();
-        entity.setIdcomplaintDetails(viewModel.getIdcomplaintDetails());
+        entity.setIdcomplaintDetails(viewModel.getId());
         entity.setComplaint(viewModel.getComplaint());
         entity.setTreatmentHistory(viewModel.getTreatmentHistory());
         entity.setTreatedAtHospital(viewModel.getTreatedAtHospital());

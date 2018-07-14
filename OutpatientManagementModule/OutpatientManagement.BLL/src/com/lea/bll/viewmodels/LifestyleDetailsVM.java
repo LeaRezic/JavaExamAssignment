@@ -10,7 +10,6 @@ package com.lea.bll.viewmodels;
  * @author Lea
  */
 public class LifestyleDetailsVM extends ViewModel {
-    private int idlifestyleDetails;
      private Boolean vegetarian;
      private Integer cigaretsPerDay;
      private Integer coffeeTeaPerDay;
@@ -18,25 +17,18 @@ public class LifestyleDetailsVM extends ViewModel {
      private String stimulantsUsed;
      private Boolean homeCookedFood;
 
-    public LifestyleDetailsVM() {
+    public LifestyleDetailsVM(int id) {
+        super(id);
     }
 
     public LifestyleDetailsVM(int idlifestyleDetails, Boolean vegetarian, Integer cigaretsPerDay, Integer coffeeTeaPerDay, Integer alcoholicDrinksPerDay, String stimulantsUsed, Boolean homeCookedFood) {
-        this.idlifestyleDetails = idlifestyleDetails;
+        super(idlifestyleDetails);
         this.vegetarian = vegetarian;
         this.cigaretsPerDay = cigaretsPerDay;
         this.coffeeTeaPerDay = coffeeTeaPerDay;
         this.alcoholicDrinksPerDay = alcoholicDrinksPerDay;
         this.stimulantsUsed = stimulantsUsed;
         this.homeCookedFood = homeCookedFood;
-    }
-
-    public int getIdlifestyleDetails() {
-        return idlifestyleDetails;
-    }
-
-    public void setIdlifestyleDetails(int idlifestyleDetails) {
-        this.idlifestyleDetails = idlifestyleDetails;
     }
 
     public Boolean getVegetarian() {

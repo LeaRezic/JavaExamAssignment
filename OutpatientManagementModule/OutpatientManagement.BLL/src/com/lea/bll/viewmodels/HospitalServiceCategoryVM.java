@@ -10,25 +10,17 @@ package com.lea.bll.viewmodels;
  * @author Lea
  */
 public class HospitalServiceCategoryVM extends ViewModel {
-    private int idhospitalServiceCategory;
      private String name;
 
-    public HospitalServiceCategoryVM() {
+    public HospitalServiceCategoryVM(int id) {
+        super(id);
     }
 
     public HospitalServiceCategoryVM(int idhospitalServiceCategory, String name) {
-        this.idhospitalServiceCategory = idhospitalServiceCategory;
+        super(idhospitalServiceCategory);
         this.name = name;
     }
-
-    public int getIdhospitalServiceCategory() {
-        return idhospitalServiceCategory;
-    }
-
-    public void setIdhospitalServiceCategory(int idhospitalServiceCategory) {
-        this.idhospitalServiceCategory = idhospitalServiceCategory;
-    }
-
+    
     public String getName() {
         return name;
     }

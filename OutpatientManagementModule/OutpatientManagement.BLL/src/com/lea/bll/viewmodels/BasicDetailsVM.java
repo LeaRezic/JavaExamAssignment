@@ -5,77 +5,33 @@
  */
 package com.lea.bll.viewmodels;
 
-import com.lea.dal.domain.entities.City;
-import com.lea.dal.domain.entities.Country;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Lea
  */
 public class BasicDetailsVM extends ViewModel {
 
-    private int idbasicDetails;
-    private String cityName;
-    private String countryName;
+    
     private String firstName;
     private String middleName;
     private String lastName;
     private String fullStreet;
     private String pincode;
+    private int cityId;
+    private int countryId;
     private String telephone;
     private String mobilePhone;
     private String email;
-    
-    private List<String> allCities;
-    private List<String> allCountries;
 
-    public List<String> getAllCities() {
-        return allCities;
+
+    public BasicDetailsVM(int id) {
+        super(id);
     }
 
-    public void setAllCities(List<String> allCities) {
-        this.allCities = allCities;
-    }
-
-    public List<String> getAllCountries() {
-        return allCountries;
-    }
-
-    public void setAllCountries(List<String> allCountries) {
-        this.allCountries = allCountries;
-    }
-    
-//    private List<City> allCities;
-//    private List<Country> allCountries;
-//
-//    public List<City> getAllCities() {
-//        return allCities;
-//    }
-//
-//    public void setAllCities(List<City> allCities) {
-//        this.allCities = allCities;
-//    }
-//
-//    public List<Country> getAllCountries() {
-//        return allCountries;
-//    }
-//
-//    public void setAllCountries(List<Country> allCountries) {
-//        this.allCountries = allCountries;
-//    }
-    
-
-    public BasicDetailsVM() {
-        allCities = new ArrayList<>();
-        allCountries = new ArrayList<>();
-    }
-
-    public BasicDetailsVM(int idbasicDetails, String cityName, String countryName, String firstName, String middleName, String lastName, String fullStreet, String pincode, String telephone, String mobilePhone, String email) {
-        this.idbasicDetails = idbasicDetails;
-        this.cityName = cityName;
-        this.countryName = countryName;
+    public BasicDetailsVM(int idbasicDetails, int cityId, int countryId, String firstName, String middleName, String lastName, String fullStreet, String pincode, String telephone, String mobilePhone, String email) {
+        super(idbasicDetails);
+        this.cityId = cityId;
+        this.countryId = countryId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -86,28 +42,20 @@ public class BasicDetailsVM extends ViewModel {
         this.email = email;
     }
 
-    public int getIdbasicDetails() {
-        return this.idbasicDetails;
+    public int getCityId() {
+        return cityId;
     }
 
-    public void setIdbasicDetails(int idbasicDetails) {
-        this.idbasicDetails = idbasicDetails;
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
-    public String getCityName() {
-        return cityName;
+    public int getCountryId() {
+        return countryId;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
     
     public String getFirstName() {
@@ -176,7 +124,7 @@ public class BasicDetailsVM extends ViewModel {
 
     @Override
     public String toString() {
-        return "BasicDetailsVM{" + "idbasicDetails=" + idbasicDetails + "City=" + cityName + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + '}';
+        return "BasicDetailsVM{" + "idbasicDetails=" + getId() + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + '}';
     }
 
 }

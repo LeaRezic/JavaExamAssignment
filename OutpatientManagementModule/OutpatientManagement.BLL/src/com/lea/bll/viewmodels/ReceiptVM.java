@@ -13,30 +13,21 @@ import java.util.Date;
  * @author Lea
  */
 public class ReceiptVM extends ViewModel {
-    private int idreceipt;
      private AppointmentVM appointment;
      private Date issueDate;
      private Boolean creditCard;
      private BigDecimal totalPrice;
 
-    public ReceiptVM() {
-        appointment = new AppointmentVM();
+    public ReceiptVM(int idReceipt) {
+        super(idReceipt);
     }
 
     public ReceiptVM(int idreceipt, AppointmentVM appointment, Date issueDate, Boolean creditCard, BigDecimal totalPrice) {
-        this.idreceipt = idreceipt;
+        super(idreceipt);
         this.appointment = appointment;
         this.issueDate = issueDate;
         this.creditCard = creditCard;
         this.totalPrice = totalPrice;
-    }
-
-    public int getIdreceipt() {
-        return idreceipt;
-    }
-
-    public void setIdreceipt(int idreceipt) {
-        this.idreceipt = idreceipt;
     }
 
     public AppointmentVM getAppointment() {

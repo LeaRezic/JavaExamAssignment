@@ -10,7 +10,6 @@ package com.lea.bll.viewmodels;
  * @author Lea
  */
 public class MedicalDetailsVM extends ViewModel {
-    private int idmedicalDetails;
      private String allergiesCondition;
      private String diabeticCondition;
      private String hypertensiveCondition;
@@ -20,11 +19,12 @@ public class MedicalDetailsVM extends ViewModel {
      private String muscularCondition;
      private String neurologicalCondition;
 
-    public MedicalDetailsVM() {
+    public MedicalDetailsVM(int id) {
+        super(id);
     }
 
     public MedicalDetailsVM(int idmedicalDetails, String allergiesCondition, String diabeticCondition, String hypertensiveCondition, String cardiacCondition, String respiratoryCondition, String digestiveCondition, String muscularCondition, String neurologicalCondition) {
-        this.idmedicalDetails = idmedicalDetails;
+        super(idmedicalDetails);
         this.allergiesCondition = allergiesCondition;
         this.diabeticCondition = diabeticCondition;
         this.hypertensiveCondition = hypertensiveCondition;
@@ -33,14 +33,6 @@ public class MedicalDetailsVM extends ViewModel {
         this.digestiveCondition = digestiveCondition;
         this.muscularCondition = muscularCondition;
         this.neurologicalCondition = neurologicalCondition;
-    }
-
-    public int getIdmedicalDetails() {
-        return idmedicalDetails;
-    }
-
-    public void setIdmedicalDetails(int idmedicalDetails) {
-        this.idmedicalDetails = idmedicalDetails;
     }
 
     public String getAllergiesCondition() {

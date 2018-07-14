@@ -38,7 +38,7 @@ public class DoctorTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0://id
-                return doctors.get(rowIndex).getIddoctor();
+                return doctors.get(rowIndex).getId();
             case 1://basic Details
                 return doctors.get(rowIndex).getBasicDetails().getFirstName() + doctors.get(rowIndex).getBasicDetails().getLastName();
             case 2://title

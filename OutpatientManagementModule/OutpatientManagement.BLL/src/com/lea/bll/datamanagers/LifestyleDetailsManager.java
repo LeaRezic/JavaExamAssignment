@@ -15,14 +15,12 @@ import com.lea.dal.domain.entities.LifestyleDetails;
 public class LifestyleDetailsManager extends DataManager {
     
     public LifestyleDetailsVM createNew() {
-        LifestyleDetailsVM viewModel = new LifestyleDetailsVM();
-        viewModel.setIdlifestyleDetails(0);
+        LifestyleDetailsVM viewModel = new LifestyleDetailsVM(0);
         return viewModel;
     }
     
     public LifestyleDetailsVM convertFromEntityToViewModel(LifestyleDetails entity) {
-        LifestyleDetailsVM viewModel = createNew();
-        viewModel.setIdlifestyleDetails(entity.getIdlifestyleDetails());
+        LifestyleDetailsVM viewModel = new LifestyleDetailsVM(entity.getIdlifestyleDetails());
         viewModel.setAlcoholicDrinksPerDay(entity.getAlcoholicDrinksPerDay());
         viewModel.setCigaretsPerDay(entity.getCigaretsPerDay());
         viewModel.setCoffeeTeaPerDay(entity.getCigaretsPerDay());
@@ -34,7 +32,7 @@ public class LifestyleDetailsManager extends DataManager {
     
     public LifestyleDetails convertFromViewModelToEntity(LifestyleDetailsVM viewModel) {
         LifestyleDetails entity = new LifestyleDetails();
-        entity.setIdlifestyleDetails(0);
+        entity.setIdlifestyleDetails(viewModel.getId());
         entity.setAlcoholicDrinksPerDay(viewModel.getAlcoholicDrinksPerDay());
         entity.setCigaretsPerDay(viewModel.getCigaretsPerDay());
         entity.setCoffeeTeaPerDay(viewModel.getCoffeeTeaPerDay());

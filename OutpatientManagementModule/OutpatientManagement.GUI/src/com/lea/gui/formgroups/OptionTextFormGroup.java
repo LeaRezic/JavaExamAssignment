@@ -14,13 +14,13 @@ import javax.swing.JComponent;
  *
  * @author Lea
  */
-public class OptionFormGroup extends FormGroup {
+public class OptionTextFormGroup extends FormGroup {
 
     public JComboBox comboBox;
     private final DefaultComboBoxModel<String> comboModel;
     private final List<String> options;
 
-    public OptionFormGroup(String labelText, List<String> options) {
+    public OptionTextFormGroup(String labelText, List<String> options) {
         super(labelText);
         this.options = options;
         comboBox = new JComboBox();

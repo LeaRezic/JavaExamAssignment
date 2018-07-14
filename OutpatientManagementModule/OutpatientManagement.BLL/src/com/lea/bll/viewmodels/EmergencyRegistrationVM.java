@@ -12,7 +12,6 @@ import java.util.Date;
  * @author Lea
  */
 public class EmergencyRegistrationVM extends ViewModel {
-    private int idemergencyRegistration;
      private int patientId;
      private Date registryDate;
      private boolean patientSex;
@@ -27,11 +26,12 @@ public class EmergencyRegistrationVM extends ViewModel {
      private String patientContact;
      private String relativeContact;
 
-    public EmergencyRegistrationVM() {
+    public EmergencyRegistrationVM(int id) {
+        super(id);
     }
 
     public EmergencyRegistrationVM(int idemergencyRegistration, int patientId, Date registryDate, boolean patientSex, String briefComplaint, String patientFirstName, String patientMiddleName, String patientLastName, String relativeFirstName, String relativeMiddleName, String relativeLastName, String relationshipOfRelative, String patientContact, String relativeContact) {
-        this.idemergencyRegistration = idemergencyRegistration;
+        super(idemergencyRegistration);
         this.patientId = patientId;
         this.registryDate = registryDate;
         this.patientSex = patientSex;
@@ -45,14 +45,6 @@ public class EmergencyRegistrationVM extends ViewModel {
         this.relationshipOfRelative = relationshipOfRelative;
         this.patientContact = patientContact;
         this.relativeContact = relativeContact;
-    }
-
-    public int getIdemergencyRegistration() {
-        return idemergencyRegistration;
-    }
-
-    public void setIdemergencyRegistration(int idemergencyRegistration) {
-        this.idemergencyRegistration = idemergencyRegistration;
     }
 
     public int getPatientId() {

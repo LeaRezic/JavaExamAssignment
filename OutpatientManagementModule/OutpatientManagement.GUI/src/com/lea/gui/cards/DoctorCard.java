@@ -5,8 +5,16 @@
  */
 package com.lea.gui.cards;
 
+import com.lea.bll.datamanagers.DdlDataManager;
 import com.lea.bll.datamanagers.DoctorManager;
 import com.lea.gui.forms.DoctorForm;
+import com.lea.utilities.OptionKeyValue;
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,14 +22,16 @@ import com.lea.gui.forms.DoctorForm;
  */
 public class DoctorCard extends javax.swing.JPanel {
 
-    private final DoctorManager doctorManager;
+    private static final DoctorManager DOCTOR_MANAGER = new DoctorManager();
+    private static final DdlDataManager DDL_MANAGER = new DdlDataManager();
 
     /**
      * Creates new form DoctorCard
      */
     public DoctorCard() {
         initComponents();
-        doctorManager = new DoctorManager();
+        loadProfessions();
+        loadDoctors();
     }
 
     /**
@@ -34,9 +44,13 @@ public class DoctorCard extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         btnAddDoctor = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listDoctors = new javax.swing.JList();
+        jLabel2 = new javax.swing.JLabel();
+        cbProfessions = new javax.swing.JComboBox();
+        btnEditDoctor = new javax.swing.JButton();
+        btnViewDoctor = new javax.swing.JButton();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 61, 61), 1, true));
         setPreferredSize(new java.awt.Dimension(730, 400));
@@ -45,32 +59,40 @@ public class DoctorCard extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(53, 112, 11));
         jLabel1.setText("DOCTORS");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Name", "Profession", "Actively employed"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
         btnAddDoctor.setText("Add");
         btnAddDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddDoctorActionPerformed(evt);
+            }
+        });
+
+        listDoctors.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listDoctors);
+
+        jLabel2.setText("Filter by profession:");
+
+        cbProfessions.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbProfessions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProfessionsActionPerformed(evt);
+            }
+        });
+
+        btnEditDoctor.setText("Edit");
+        btnEditDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditDoctorActionPerformed(evt);
+            }
+        });
+
+        btnViewDoctor.setText("View");
+        btnViewDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDoctorActionPerformed(evt);
             }
         });
 
@@ -80,37 +102,148 @@ public class DoctorCard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAddDoctor)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbProfessions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddDoctor)
+                        .addGap(117, 117, 117)
+                        .addComponent(btnEditDoctor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnViewDoctor))
+                    .addComponent(jScrollPane2))
+                .addContainerGap(402, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cbProfessions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnAddDoctor)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddDoctor)
+                    .addComponent(btnEditDoctor)
+                    .addComponent(btnViewDoctor))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDoctorActionPerformed
-        DoctorForm form = new DoctorForm(doctorManager.createNew());
-        //DoctorForm form = new DoctorForm(doctorManager.getById(2));
+        DoctorForm form = new DoctorForm(DOCTOR_MANAGER.createNew());
+        //DoctorForm form = new DoctorForm(doctorManager.getById(9));
         form.setLocationRelativeTo(null);
         form.setVisible(true);
+        form.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                if (form.isSuccessful()) {
+                    cbProfessions.setSelectedIndex(0);
+                    resetDoctorsList();
+                }
+                e.getWindow().dispose();
+            }
+        });
     }//GEN-LAST:event_btnAddDoctorActionPerformed
+
+    private void btnViewDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDoctorActionPerformed
+        // TODO add your handling code here:
+        int index = ((OptionKeyValue)listDoctors.getSelectedValue()).getKey();
+        DoctorForm form = new DoctorForm(DOCTOR_MANAGER.getById(index));
+        //setEnabled(form, false);
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);
+        form.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                if (form.isSuccessful()) {
+                    cbProfessions.setSelectedIndex(0);
+                    resetDoctorsList();
+                }
+                e.getWindow().dispose();
+            }
+        });
+    }//GEN-LAST:event_btnViewDoctorActionPerformed
+
+    private void cbProfessionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProfessionsActionPerformed
+        // TODO add your handling code here:
+        resetDoctorsList();
+    }//GEN-LAST:event_cbProfessionsActionPerformed
+
+    private void btnEditDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDoctorActionPerformed
+        // TODO add your handling code here:
+        cbProfessions.setSelectedIndex(0);
+    }//GEN-LAST:event_btnEditDoctorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddDoctor;
+    private javax.swing.JButton btnEditDoctor;
+    private javax.swing.JButton btnViewDoctor;
+    private javax.swing.JComboBox cbProfessions;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList listDoctors;
     // End of variables declaration//GEN-END:variables
+
+    private DefaultComboBoxModel<OptionKeyValue> cbProfessionsModel;
+    private DefaultListModel<OptionKeyValue> listDoctorsModel;
+
+//    private void setEnabled(Component component, boolean enabled) {
+//        if (!(component instanceof JButton)) {
+//            component.setEnabled(enabled);
+//        }
+//        if (component instanceof Container) {
+//            for (Component child : ((Container) component).getComponents()) {
+//                setEnabled(child, enabled);
+//            }
+//        }
+//    }
+
+    private void loadProfessions() {
+        cbProfessionsModel = new DefaultComboBoxModel<>();
+        cbProfessionsModel.addElement(new OptionKeyValue(-1, "  - - - show all - - -"));
+        DDL_MANAGER.getAllProfessions()
+                .forEach((option) -> {
+                    cbProfessionsModel.addElement(option);
+                });
+        cbProfessions.setModel(cbProfessionsModel);
+    }
+
+    private void loadDoctors() {
+        listDoctorsModel = new DefaultListModel<>();
+        DOCTOR_MANAGER.getAll()
+                .forEach(d -> listDoctorsModel.addElement(new OptionKeyValue(d.getId(), d.toString())));
+        listDoctors.setModel(listDoctorsModel);
+        if (!listDoctorsModel.isEmpty()) {
+            listDoctors.setSelectedIndex(0);
+        }
+    }
+
+    private void resetDoctorsList() {
+        int idProfession = ((OptionKeyValue)cbProfessions.getSelectedItem()).getKey();
+        if (idProfession == -1) {
+            loadDoctors();
+            return;
+        }
+        listDoctorsModel = new DefaultListModel<>();
+        DOCTOR_MANAGER.getAll()
+                .stream()
+                .filter(d->d.getDoctorDetails().getProfession() == idProfession)
+                .forEach(d -> listDoctorsModel.addElement(new OptionKeyValue(d.getId(), d.toString())));
+        listDoctors.setModel(listDoctorsModel);
+        if (!listDoctorsModel.isEmpty()) {
+            listDoctors.setSelectedIndex(0);
+        }
+    }
+
 }

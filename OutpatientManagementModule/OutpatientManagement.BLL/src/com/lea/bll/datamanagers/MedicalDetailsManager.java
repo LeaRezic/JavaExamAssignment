@@ -15,14 +15,12 @@ import com.lea.dal.domain.entities.MedicalDetails;
 public class MedicalDetailsManager extends DataManager {
     
     public MedicalDetailsVM createNew() {
-        MedicalDetailsVM viewModel = new MedicalDetailsVM();
-        viewModel.setIdmedicalDetails(0);
+        MedicalDetailsVM viewModel = new MedicalDetailsVM(0);
         return viewModel;
     }
     
     public MedicalDetailsVM convertFromEntityToViewModel(MedicalDetails entity) {
-        MedicalDetailsVM viewModel = new MedicalDetailsVM();
-        viewModel.setIdmedicalDetails(entity.getIdmedicalDetails());
+        MedicalDetailsVM viewModel = new MedicalDetailsVM(entity.getIdmedicalDetails());
         viewModel.setAllergiesCondition(entity.getAllergiesCondition());
         viewModel.setCardiacCondition(entity.getCardiacCondition());
         viewModel.setDiabeticCondition(entity.getCardiacCondition());

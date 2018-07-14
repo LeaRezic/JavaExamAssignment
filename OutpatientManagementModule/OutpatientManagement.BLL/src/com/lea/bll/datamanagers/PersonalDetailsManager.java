@@ -15,17 +15,16 @@ import com.lea.dal.domain.entities.PersonalDetails;
  */
 public class PersonalDetailsManager extends DataManager {
     
+    
     public PersonalDetailsVM createNew() {
-        PersonalDetailsVM viewModel = new PersonalDetailsVM();
-        viewModel.setIdpersonalDetails(0);
+        PersonalDetailsVM viewModel = new PersonalDetailsVM(0);
         viewModel.setAllBloodTypes(repository.getAllBloodTypes());
         viewModel.setAllMaritalStatus(repository.getAllMaritalStatuses());
         return viewModel;
     }
     
     public PersonalDetailsVM convertFromEntityToViewModel(PersonalDetails entity) {
-        PersonalDetailsVM viewModel = createNew();
-        viewModel.setIdpersonalDetails(entity.getIdpersonalDetails());
+        PersonalDetailsVM viewModel = new PersonalDetailsVM(entity.getIdpersonalDetails());
         viewModel.setSex(entity.getSex() == true ? Sex.F : Sex.M);
         viewModel.setDateOfBirth(entity.getDateOfBirth());
         viewModel.setHeight(entity.getHeight());
@@ -38,7 +37,7 @@ public class PersonalDetailsManager extends DataManager {
     
     public PersonalDetails convertFromViewModelToEntity(PersonalDetailsVM viewModel) {
         PersonalDetails entity = new PersonalDetails();
-        entity.setIdpersonalDetails(viewModel.getIdpersonalDetails());
+        entity.setIdpersonalDetails(viewModel.getId());
         entity.setDateOfBirth(viewModel.getDateOfBirth());
         entity.setSex(viewModel.getSex() == Sex.F);
         entity.setHeight(viewModel.getHeight());

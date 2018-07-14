@@ -22,18 +22,15 @@ public final class DoctorManager extends DataManager {
     public DoctorManager() {
         basicDetailsManager = new BasicDetailsManager();
     }
-    
+
     public DoctorVM getById(int id) {
         return convertEntityToViewModel(repository.getDoctorById(id));
     }
 
     public DoctorVM createNew() {
-        DoctorVM viewModel = new DoctorVM();
-        viewModel.setIddoctor(0);
+        DoctorVM viewModel = new DoctorVM(0);
         viewModel.setBasicDetails(basicDetailsManager.createNew());
         viewModel.setDoctorDetails(new DoctorDetailsVM());
-        repository.getAllDoctorSpecializations().forEach(s -> viewModel.getDoctorDetails().getAllSpecializations().add(s.getName()));
-        //viewModel.setAllSpecializations(repository.getAllDoctorSpecializations());
         return viewModel;
     }
 
@@ -51,10 +48,10 @@ public final class DoctorManager extends DataManager {
     }
 
     protected DoctorVM convertEntityToViewModel(Doctor entity) {
-        DoctorVM viewModel = createNew();
-        viewModel.setIddoctor(entity.getIddoctor());
+        DoctorVM viewModel = new DoctorVM(entity.getIddoctor());
+        viewModel.setDoctorDetails(new DoctorDetailsVM());
         viewModel.getDoctorDetails().setTitle(entity.getTitle());
-        viewModel.getDoctorDetails().setProfession(entity.getDoctorSpecialization().getName());
+        viewModel.getDoctorDetails().setProfession(entity.getDoctorSpecialization().getIddoctorSpecialization());
         viewModel.getDoctorDetails().setActive(entity.isActive());
         viewModel.setBasicDetails(basicDetailsManager.convertFromEntityToViewModel(entity.getBasicDetails()));
         return viewModel;
@@ -62,14 +59,14 @@ public final class DoctorManager extends DataManager {
 
     public Doctor convertFromViewModelToEntity(DoctorVM viewModel) {
         Doctor entity = new Doctor();
-        entity.setIddoctor(viewModel.getIddoctor());
+        entity.setIddoctor(viewModel.getId());
         entity.setBasicDetails(basicDetailsManager.convertFromViewModelToEntity(viewModel.getBasicDetails()));
         entity.setActive(viewModel.getDoctorDetails().isActive());
         entity.setTitle(viewModel.getDoctorDetails().getTitle());
 
         repository.getAllDoctorSpecializations()
                 .stream()
-                .filter(s -> s.getName().equals(viewModel.getDoctorDetails().getProfession()))
+                .filter(s -> s.getIddoctorSpecialization() == viewModel.getDoctorDetails().getProfession())
                 .findFirst()
                 .ifPresent(s -> entity.setDoctorSpecialization(s));
 

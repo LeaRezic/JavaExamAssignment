@@ -5,12 +5,18 @@
  */
 package com.lea.gui.panelbuilders;
 
+import com.lea.bll.datamanagers.DdlDataManager;
 import com.lea.bll.viewmodels.BasicDetailsVM;
 import com.lea.bll.viewmodels.ViewModel;
 import com.lea.gui.formgroups.FormGroup;
-import com.lea.gui.formgroups.OptionFormGroup;
+import com.lea.gui.formgroups.OptionTextFormGroup;
+import com.lea.gui.formgroups.OptionKeyValueFormGroup;
 import com.lea.gui.formgroups.TextFormGroup;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +25,7 @@ import java.util.ArrayList;
 public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
 
     public BasicDetailsVM viewModel;
+    public DdlDataManager ddlManager;
     private FormGroup firstName;
     private FormGroup middleName;
     private FormGroup lastName;
@@ -33,14 +40,14 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
     public BasicDetailsPanelBuilder(BasicDetailsVM viewModel) {
         super("Basic Details", 400, 400);
         formGroups = new ArrayList<>();
-        this.viewModel = new BasicDetailsVM();
+        ddlManager = new DdlDataManager();
         setModel(viewModel);
     }
 
     public BasicDetailsPanelBuilder(String title, BasicDetailsVM viewModel) {
         super(title, 400, 400);
         formGroups = new ArrayList<>();
-        this.viewModel = new BasicDetailsVM();
+        ddlManager = new DdlDataManager();
         setModel(viewModel);
     }
 
@@ -61,15 +68,25 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
         fullStreet.setIsMandatory(true);
         formGroups.add(fullStreet);
 
-        city = new OptionFormGroup("City", viewModel.getAllCities());
+//        city = new OptionFormGroup("City", viewModel.getAllCities());
+//        formGroups.add(city);
+        
+        
+        country = new OptionKeyValueFormGroup("Country", ddlManager.getAllCountries());
+        country.setValue(1);
+        formGroups.add(country);
+        
+        city = new OptionKeyValueFormGroup("City", ddlManager.getAllCitiesByCountry(1));
         formGroups.add(city);
+        
+        wireDdlActions();
 
         zipCode = new TextFormGroup("ZIP code");
         zipCode.setIsMandatory(true);
         formGroups.add(zipCode);
 
-        country = new OptionFormGroup("Country", viewModel.getAllCountries());
-        formGroups.add(country);
+//        country = new OptionFormGroup("Country", viewModel.getAllCountries());
+//        formGroups.add(country);
 
         telephone = new TextFormGroup("Telephone");
         telephone.setIsMandatory(true);
@@ -81,7 +98,7 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
         email = new TextFormGroup("E-mail");
         formGroups.add(email);
 
-        if (viewModel.getIdbasicDetails() != 0) {
+        if (viewModel.getId() != 0) {
             displayViewModel();
         }
 
@@ -105,9 +122,9 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
         viewModel.setMiddleName((String) middleName.getValue());
         viewModel.setLastName((String) lastName.getValue());
         viewModel.setFullStreet((String) fullStreet.getValue());
-        viewModel.setCityName((String) city.getValue());
+        viewModel.setCityId((int) city.getValue());
         viewModel.setPincode((String) zipCode.getValue());
-        viewModel.setCountryName((String) country.getValue());
+        viewModel.setCountryId((int) country.getValue());
         viewModel.setTelephone((String) telephone.getValue());
         viewModel.setMobilePhone((String) mobilePhone.getValue());
         viewModel.setEmail((String) email.getValue());
@@ -117,6 +134,27 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
         firstName.setValue(viewModel.getFirstName());
         middleName.setValue(viewModel.getMiddleName());
         lastName.setValue(viewModel.getLastName());
+        fullStreet.setValue(viewModel.getFullStreet());
+        zipCode.setValue(viewModel.getPincode());
+        telephone.setValue(viewModel.getTelephone());
+        mobilePhone.setValue(viewModel.getMobilePhone());
+        email.setValue(viewModel.getEmail());
+        country.setValue(viewModel.getCountryId());
+        city.setValue(viewModel.getCityId());
+    }
+
+    private void wireDdlActions() {
+        JComboBox ddlCountries = (JComboBox) country.getComponent();
+        if (ddlCountries.getModel().getSize() != 0) {
+            ddlCountries.setSelectedIndex(0);
+        }
+        ddlCountries.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedCountryId = (int)country.getValue();
+                ((OptionKeyValueFormGroup) city).resetOptions(ddlManager.getAllCitiesByCountry(selectedCountryId));
+            }
+        } );
     }
 
 }

@@ -10,26 +10,16 @@ package com.lea.bll.viewmodels;
  * @author Lea
  */
 public class CountryVM extends ViewModel {
-    private int idcountry;
      private String name;
 
-    public CountryVM() {
+    public CountryVM(int id) {
+        super(id);
     }
-
 	
     public CountryVM(int idcountry, String name) {
-        this.idcountry = idcountry;
+        super(idcountry);
         this.name = name;
     }
-    
-    public int getIdcountry() {
-        return this.idcountry;
-    }
-    
-    public void setIdcountry(int idcountry) {
-        this.idcountry = idcountry;
-    }
-
    
     public String getName() {
         return this.name;

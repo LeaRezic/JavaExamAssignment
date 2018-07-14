@@ -11,4 +11,15 @@ package com.lea.bll.viewmodels;
  */
 public class ViewModel {
     
+    private final int id;
+
+    public ViewModel(int id) {
+        this.id = id;
+    }
+    
+    
+    public int getId() {
+        return id;
+    }
+    
 }

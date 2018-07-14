@@ -5,13 +5,15 @@
  */
 package com.lea.gui.panelbuilders;
 
+import com.lea.bll.datamanagers.DdlDataManager;
 import com.lea.bll.viewmodels.DoctorDetailsVM;
 import com.lea.bll.viewmodels.ViewModel;
 import com.lea.gui.formgroups.FormGroup;
-import com.lea.gui.formgroups.OptionFormGroup;
+import com.lea.gui.formgroups.OptionTextFormGroup;
+import com.lea.gui.formgroups.OptionKeyValueFormGroup;
 import com.lea.gui.formgroups.TextFormGroup;
+import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JTextField;
 
 /**
  *
@@ -20,48 +22,37 @@ import javax.swing.JTextField;
 public class DoctorDetailsPanelBuilder extends ViewModelPanelBuilder {
 
     private DoctorDetailsVM viewModel;
-    private TextFormGroup doctorTitle;
-    private OptionFormGroup profession;
-    private OptionFormGroup active;
-
-//    public DoctorDetailsPanelBuilder() {
-//        super("Employment details", 400, 120);
-//        viewModel = new DoctorDetailsVM();
-//    }
+    private FormGroup doctorTitle;
+    private FormGroup profession;
+    private FormGroup active;
+    private static final DdlDataManager DDL_MANAGER = new DdlDataManager();
 
     public DoctorDetailsPanelBuilder(DoctorDetailsVM viewModel) {
         super("Employment details", 400, 120);
-        setModel(viewModel);
-        //setFormGroups();
-        
+        formGroups = new ArrayList<>();
+        this.viewModel = viewModel;
     }
-    
+
     @Override
     public void setFormGroups() {
 
         doctorTitle = new TextFormGroup("Title");
         doctorTitle.setIsMandatory(true);
-        if (viewModel.getTitle() != null) {
-            doctorTitle.setValue(viewModel.getTitle());
-        }
         formGroups.add(doctorTitle);
-        
-        profession = new OptionFormGroup("Specialization", viewModel.getAllSpecializations());
-        if (viewModel.getProfession() != null) {
-            profession.setValue(viewModel.getProfession());
-        }
+
+        profession = new OptionKeyValueFormGroup("Specialization", DDL_MANAGER.getAllProfessions());
         formGroups.add(profession);
-        
-        active = new OptionFormGroup("Actively employed", Arrays.asList(new String[]{"YES", "NO"}));
-        active.setValue(viewModel.isActive() ? "YES" : "NO");
+
+        active = new OptionTextFormGroup("Actively employed", Arrays.asList(new String[]{"YES", "NO"}));
         formGroups.add(active);
 
+        displayViewModel();
+        
     }
 
     @Override
     public void setModel(ViewModel viewModel) {
         this.viewModel = (DoctorDetailsVM) viewModel;
-        
     }
 
     @Override
@@ -75,12 +66,13 @@ public class DoctorDetailsPanelBuilder extends ViewModelPanelBuilder {
     private void loadViewModel() {
         viewModel.setTitle((String) doctorTitle.getValue());
         viewModel.setActive(((String) active.getValue()).equals("YES"));
-        viewModel.setProfession((String) profession.getValue());
+        viewModel.setProfession((int) profession.getValue());
     }
 
     private void displayViewModel() {
-        //((JTextField) doctorTitle.getComponent()).setText("blaaaa");
-        
+        doctorTitle.setValue(viewModel.getTitle());
+        profession.setValue(viewModel.getProfession());
+        active.setValue(viewModel.isActive() ? "YES" : "NO");
     }
 
 }

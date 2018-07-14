@@ -5,6 +5,7 @@
  */
 package com.lea.gui.formgroups;
 
+import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
@@ -30,6 +31,8 @@ public abstract class FormGroup {
     
     public void setIsMandatory(Boolean isMandatory) {
         this.isMandatory = isMandatory;
+        //label.setForeground(Color.red);
+        label.setText(label.getText() + "*");
     }
     
     public JLabel getLabel() {

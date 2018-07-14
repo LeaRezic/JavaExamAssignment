@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Lea
  */
 public class PatientVM extends ViewModel {
-    private int idpatient;
+
     private PatientDetailsVM patientDetails;
     private BasicDetailsVM basicDetailsByNextOfKinId;
     private BasicDetailsVM basicDetailsByBasicDetailsId;
@@ -21,11 +21,12 @@ public class PatientVM extends ViewModel {
     private MedicalDetailsVM medicalDetails;
     private PersonalDetailsVM personalDetails;
 
-    public PatientVM() {
+    public PatientVM(int id) {
+        super(id);
     }
 
     public PatientVM(int idpatient, PatientDetailsVM patientDetails, BasicDetailsVM basicDetailsByNextOfKinId, BasicDetailsVM basicDetailsByBasicDetailsId, ComplaintDetailsVM complaintDetails, LifestyleDetailsVM lifestyleDetails, MedicalDetailsVM medicalDetails, PersonalDetailsVM personalDetails) {
-        this.idpatient = idpatient;
+        super(idpatient);
         this.patientDetails = patientDetails;
         this.basicDetailsByNextOfKinId = basicDetailsByNextOfKinId;
         this.basicDetailsByBasicDetailsId = basicDetailsByBasicDetailsId;
@@ -33,14 +34,6 @@ public class PatientVM extends ViewModel {
         this.lifestyleDetails = lifestyleDetails;
         this.medicalDetails = medicalDetails;
         this.personalDetails = personalDetails;
-    }
-
-    public int getIdpatient() {
-        return idpatient;
-    }
-
-    public void setIdpatient(int idpatient) {
-        this.idpatient = idpatient;
     }
 
     public PatientDetailsVM getPatientDetails() {

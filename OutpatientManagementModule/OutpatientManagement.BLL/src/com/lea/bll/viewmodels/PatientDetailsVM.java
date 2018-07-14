@@ -18,9 +18,11 @@ public class PatientDetailsVM extends ViewModel {
      private String nextOfKinRelationship;
 
     public PatientDetailsVM() {
+        super(0);
     }
 
     public PatientDetailsVM(String opid, Date fullRegistrationDate, String nextOfKinRelationship) {
+        super(0);
         this.opid = opid;
         this.fullRegistrationDate = fullRegistrationDate;
         this.nextOfKinRelationship = nextOfKinRelationship;

@@ -93,6 +93,9 @@ public class DatabaseRepository implements Repository {
             int basicDetailsId = insertEntity(d.getBasicDetails());
             d.setBasicDetails((BasicDetails) getEntityByIdOfType(BasicDetails.class.getSimpleName(),basicDetailsId));
             insertEntity(d);
+        } else {
+            updateEntity(d.getBasicDetails());
+            updateEntity(d);
         }
         return true;
         
@@ -212,6 +215,11 @@ public class DatabaseRepository implements Repository {
     @Override
     public List<Country> getAllCountries() {
         return (List<Country>) getAllEntitiesOfType(Country.class.getSimpleName());
+    }
+
+    @Override
+    public City getCityById(int id) {
+        return (City) getEntityByIdOfType(City.class.getSimpleName(), id);
     }
 
 }

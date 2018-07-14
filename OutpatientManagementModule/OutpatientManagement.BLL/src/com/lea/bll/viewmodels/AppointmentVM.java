@@ -5,46 +5,31 @@
  */
 package com.lea.bll.viewmodels;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 /**
  *
  * @author Lea
  */
 public class AppointmentVM extends ViewModel {
 
-    private int idappointment;
     private DoctorVM doctor;
     private PatientVM patient;
     private Date date;
     private String diagnosis;
     private List<HospitalServiceVM> appointmentServices;
 
-    public AppointmentVM() {
-        doctor = new DoctorVM();
-        patient = new PatientVM();
-        appointmentServices = new ArrayList<HospitalServiceVM>();
+    public AppointmentVM(int id) {
+        super(id);
     }
 
     public AppointmentVM(int idappointment, DoctorVM doctor, PatientVM patient, Date date, String diagnosis, List<HospitalServiceVM> appointmentServices) {
-        this.idappointment = idappointment;
+        super(idappointment);
         this.doctor = doctor;
         this.patient = patient;
         this.date = date;
         this.diagnosis = diagnosis;
         this.appointmentServices = appointmentServices;
-    }
-
-    public int getIdappointment() {
-        return idappointment;
-    }
-
-    public void setIdappointment(int idappointment) {
-        this.idappointment = idappointment;
     }
 
     public DoctorVM getDoctor() {

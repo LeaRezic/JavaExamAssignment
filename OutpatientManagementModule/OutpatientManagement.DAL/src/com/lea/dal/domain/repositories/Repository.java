@@ -36,6 +36,8 @@ public interface Repository {
     public List<EmergencyRegistration> getAllEmeregencyRegistrations();
     
     public void insertOrUpdateComplaintDetails(ComplaintDetails cd);
+
+    public City getCityById(int id);
     
 
 }

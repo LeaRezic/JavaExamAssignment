@@ -5,8 +5,6 @@
  */
 package DataFields;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 /**
  *
  * @author Lea

@@ -15,18 +15,20 @@ import java.util.List;
 public class DoctorDetailsVM extends ViewModel {
 
     private String title;
-    private String profession;
+    private int professionId;
     private boolean active;
     
-    private List<String> allSpecializations;
+//    private List<String> allSpecializations;
 
     public DoctorDetailsVM() {
-        allSpecializations = new ArrayList<>();
+        super(0);
+//        allSpecializations = new ArrayList<>();
     }
 
-    public DoctorDetailsVM(String title, String profession, boolean active) {
+    public DoctorDetailsVM(String title, int professionId, boolean active) {
+        super(0);
         this.title = title;
-        this.profession = profession;
+        this.professionId = professionId;
         this.active = active;
     }
 
@@ -38,12 +40,12 @@ public class DoctorDetailsVM extends ViewModel {
         this.title = title;
     }
 
-    public String getProfession() {
-        return profession;
+    public int getProfession() {
+        return professionId;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession;
+    public void setProfession(int profession) {
+        this.professionId = profession;
     }
 
     public boolean isActive() {
@@ -54,12 +56,12 @@ public class DoctorDetailsVM extends ViewModel {
         this.active = active;
     }
     
-    public List<String> getAllSpecializations() {
-        return allSpecializations;
-    }
-
-    public void setAllSpecializations(List<String> allSpecializations) {
-        this.allSpecializations = allSpecializations;
-    }
+//    public List<String> getAllSpecializations() {
+//        return allSpecializations;
+//    }
+//
+//    public void setAllSpecializations(List<String> allSpecializations) {
+//        this.allSpecializations = allSpecializations;
+//    }
 
 }

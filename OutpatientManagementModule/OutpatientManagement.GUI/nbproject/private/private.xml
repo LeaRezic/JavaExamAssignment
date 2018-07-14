@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/cards/RegistrationCard.java</file>
-            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/tables/DoctorTableModel.java</file>
-            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/forms/OutpatientManagementGuiApp.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/forms/DoctorForm.java</file>
             <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/output/gui/Main.java</file>
-            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/cards/AppointmentCard.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/forms/OutpatientManagementGuiApp.java</file>
             <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/cards/DoctorCard.java</file>
-            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/cards/StatisticsCard.java</file>
+            <file>file:/C:/Users/Lea/Documents/Algebra/IV%20Semestar/JAVA/JavaExamAssignment_LeaRezic/OutpatientManagementModule/OutpatientManagement.GUI/src/com/lea/gui/components/SwitchCardButton.java</file>
         </group>
     </open-files>
 </project-private>
