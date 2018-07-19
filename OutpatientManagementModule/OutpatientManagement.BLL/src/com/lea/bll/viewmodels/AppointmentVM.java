@@ -7,6 +7,7 @@ package com.lea.bll.viewmodels;
 
 import java.util.Date;
 import java.util.List;
+
 /**
  *
  * @author Lea
@@ -21,15 +22,6 @@ public class AppointmentVM extends ViewModel {
 
     public AppointmentVM(int id) {
         super(id);
-    }
-
-    public AppointmentVM(int idappointment, DoctorVM doctor, PatientVM patient, Date date, String diagnosis, List<HospitalServiceVM> appointmentServices) {
-        super(idappointment);
-        this.doctor = doctor;
-        this.patient = patient;
-        this.date = date;
-        this.diagnosis = diagnosis;
-        this.appointmentServices = appointmentServices;
     }
 
     public DoctorVM getDoctor() {
@@ -72,6 +64,4 @@ public class AppointmentVM extends ViewModel {
         this.appointmentServices = appointmentServices;
     }
 
-    
-    
 }

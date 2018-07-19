@@ -5,6 +5,9 @@
  */
 package com.lea.gui.cards;
 
+import com.lea.bll.datamanagers.ReportsManager;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lea
@@ -14,6 +17,9 @@ public class StatisticsCard extends javax.swing.JPanel {
     /**
      * Creates new form StatisticsCard
      */
+    
+    private static final ReportsManager DATA_MANAGER = new ReportsManager();
+    
     public StatisticsCard() {
         initComponents();
     }
@@ -29,9 +35,9 @@ public class StatisticsCard extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnGeneralReport = new javax.swing.JButton();
+        btnAppointmentsPerDoctor = new javax.swing.JButton();
+        btnServicesPerPatient = new javax.swing.JButton();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 61, 61), 1, true));
         setPreferredSize(new java.awt.Dimension(730, 400));
@@ -42,11 +48,26 @@ public class StatisticsCard extends javax.swing.JPanel {
 
         jLabel2.setText("Generate report:");
 
-        jButton1.setText("Daily Report");
+        btnGeneralReport.setText("General Numbers");
+        btnGeneralReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGeneralReportActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Weekly Report");
+        btnAppointmentsPerDoctor.setText("Appointments per Doctor");
+        btnAppointmentsPerDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAppointmentsPerDoctorActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Monthly Report");
+        btnServicesPerPatient.setText("Services sum per Patient");
+        btnServicesPerPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServicesPerPatientActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,10 +81,10 @@ public class StatisticsCard extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(397, Short.MAX_VALUE))
+                            .addComponent(btnServicesPerPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAppointmentsPerDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGeneralReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(402, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,20 +94,34 @@ public class StatisticsCard extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(btnGeneralReport))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnAppointmentsPerDoctor)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnServicesPerPatient)
                 .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnServicesPerPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicesPerPatientActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,  DATA_MANAGER.getServicesSumPerPatient());
+    }//GEN-LAST:event_btnServicesPerPatientActionPerformed
+
+    private void btnAppointmentsPerDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentsPerDoctorActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, DATA_MANAGER.getApppointmentsPerDoctorReport());
+    }//GEN-LAST:event_btnAppointmentsPerDoctorActionPerformed
+
+    private void btnGeneralReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralReportActionPerformed
+        JOptionPane.showMessageDialog(null, DATA_MANAGER.getEntityNumbersReport());
+    }//GEN-LAST:event_btnGeneralReportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAppointmentsPerDoctor;
+    private javax.swing.JButton btnGeneralReport;
+    private javax.swing.JButton btnServicesPerPatient;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

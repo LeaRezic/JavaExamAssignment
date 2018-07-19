@@ -21,7 +21,7 @@ import javax.persistence.Table;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class Country extends EntityBase implements java.io.Serializable {
+public class Country implements EntityBase, java.io.Serializable {
 
 
      private int idcountry;
@@ -69,6 +69,11 @@ public class Country extends EntityBase implements java.io.Serializable {
     
     public void setCities(Set<City> cities) {
         this.cities = cities;
+    }
+
+    @Override
+    public int fetchEntityId() {
+        return getIdcountry();
     }
 
 

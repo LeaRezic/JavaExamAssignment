@@ -20,8 +20,7 @@ import javax.persistence.Table;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class AppointmentService extends EntityBase implements java.io.Serializable {
-
+public class AppointmentService implements EntityBase, java.io.Serializable {
 
      private int idappointmentService;
      private Appointment appointment;
@@ -70,8 +69,10 @@ public class AppointmentService extends EntityBase implements java.io.Serializab
         this.hospitalService = hospitalService;
     }
 
-
-
+    @Override
+    public int fetchEntityId() {
+        return getIdappointmentService();
+    }
 
 }
 

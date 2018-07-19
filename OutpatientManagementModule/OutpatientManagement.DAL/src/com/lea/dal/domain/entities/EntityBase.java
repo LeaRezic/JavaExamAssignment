@@ -9,6 +9,8 @@ package com.lea.dal.domain.entities;
  *
  * @author Lea
  */
-public class EntityBase {
+public interface EntityBase {
+    
+    public int fetchEntityId();
     
 }

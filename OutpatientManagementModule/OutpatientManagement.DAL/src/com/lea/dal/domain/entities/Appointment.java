@@ -2,6 +2,7 @@ package com.lea.dal.domain.entities;
 // Generated 28.06.2018. 08:51:52 by Hibernate Tools 4.3.1
 
 
+import com.lea.utilities.DateConverter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,8 +27,7 @@ import javax.persistence.TemporalType;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class Appointment extends EntityBase implements java.io.Serializable {
-
+public class Appointment implements EntityBase, java.io.Serializable {
 
      private int idappointment;
      private Doctor doctor;
@@ -125,9 +125,16 @@ public class Appointment extends EntityBase implements java.io.Serializable {
         this.receipts = receipts;
     }
 
+    @Override
+    public int fetchEntityId() {
+        return idappointment;
+    }
 
-
-
+    @Override
+    public String toString() {
+        return DateConverter.getStringFromDate(date) + ", patient: " + patient.getBasicDetailsByBasicDetailsId().getLastName();
+    }
+    
 }
 
 

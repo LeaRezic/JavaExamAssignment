@@ -21,8 +21,7 @@ import javax.persistence.Table;
     ,schema="dbo"
     ,catalog="VirgoHospitals"
 )
-public class BloodType extends EntityBase implements java.io.Serializable {
-
+public class BloodType implements EntityBase, java.io.Serializable {
 
      private int idbloodType;
      private String name;
@@ -30,7 +29,6 @@ public class BloodType extends EntityBase implements java.io.Serializable {
 
     public BloodType() {
     }
-
 	
     public BloodType(int idbloodType) {
         this.idbloodType = idbloodType;
@@ -70,8 +68,10 @@ public class BloodType extends EntityBase implements java.io.Serializable {
         this.personalDetailses = personalDetailses;
     }
 
-
-
+    @Override
+    public int fetchEntityId() {
+        return getIdbloodType();
+    }
 
 }
 

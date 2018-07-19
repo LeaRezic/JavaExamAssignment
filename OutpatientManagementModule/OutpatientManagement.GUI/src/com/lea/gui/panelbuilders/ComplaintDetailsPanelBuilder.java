@@ -9,6 +9,7 @@ import com.lea.bll.viewmodels.ComplaintDetailsVM;
 import com.lea.bll.viewmodels.ViewModel;
 import com.lea.gui.formgroups.FormGroup;
 import com.lea.gui.formgroups.TextFormGroup;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,8 +22,10 @@ public class ComplaintDetailsPanelBuilder extends ViewModelPanelBuilder {
     private FormGroup treatmentHistory;
     private FormGroup treatedAtHospital;
 
-    public ComplaintDetailsPanelBuilder() {
-        super("Complaint details", 400, 200);
+    public ComplaintDetailsPanelBuilder(ViewModel viewModel) {
+        super("Complaint details", 400, 120);
+        formGroups = new ArrayList<>();
+        this.viewModel = (ComplaintDetailsVM) viewModel;
     }
 
     @Override
@@ -38,6 +41,10 @@ public class ComplaintDetailsPanelBuilder extends ViewModelPanelBuilder {
         treatedAtHospital = new TextFormGroup("Treated at hospital");
         formGroups.add(treatedAtHospital);
 
+        if (viewModel.getId() != 0) {
+            displayViewModel();
+        }
+        
     }
 
     @Override
@@ -57,6 +64,17 @@ public class ComplaintDetailsPanelBuilder extends ViewModelPanelBuilder {
         viewModel.setComplaint((String) complaint.getValue());
         viewModel.setTreatmentHistory((String) treatmentHistory.getValue());
         viewModel.setTreatedAtHospital((String) treatedAtHospital.getValue());
+    }
+
+    private void displayViewModel() {
+        complaint.setValue(viewModel.getComplaint());
+        treatmentHistory.setValue(viewModel.getTreatmentHistory());
+        treatedAtHospital.setValue(viewModel.getTreatmentHistory());
+    }
+
+    @Override
+    public PanelBuilderType getType() {
+        return PanelBuilderType.COMPLAINTDETAILS;
     }
 
 }

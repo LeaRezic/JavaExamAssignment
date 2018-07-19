@@ -34,12 +34,10 @@ public class OptionTextFormGroup extends FormGroup {
     }
 
     private void setComboBoxOptions(List<String> options) {
-
         options.forEach((option) -> {
             comboModel.addElement(option);
         });
         comboBox.setModel(comboModel);
-
     }
 
     @Override
@@ -50,6 +48,11 @@ public class OptionTextFormGroup extends FormGroup {
     @Override
     public void setValue(Object value) {
         comboBox.setSelectedIndex(options.indexOf((String) value));
+    }
+
+    @Override
+    public String getReadOnlyValue() {
+        return getValue().toString();
     }
 
 }

@@ -14,6 +14,7 @@ import java.awt.Insets;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -31,14 +32,19 @@ public abstract class ViewModelPanelBuilder {
     public ViewModelPanelBuilder(String title, int width, int height) {
         this.title = title;
         panel = new JPanel();
-        this.width = width;
+        this.width = 450;
         this.height = height;
         formGroups = new ArrayList<>();
+    }
+    
+    public String getTitle() {
+        return title;
     }
 
     public abstract void setFormGroups();
 
-    private void drawPanel() {
+    private void drawPanel(boolean editable) {
+        
         panel.setBorder(BorderFactory.createTitledBorder(title));
         panel.setPreferredSize(new Dimension(width, height));
         GridBagLayout layout = new GridBagLayout();
@@ -55,15 +61,19 @@ public abstract class ViewModelPanelBuilder {
             panel.add(formGroup.getLabel(), c);
             c.gridx++;
             c.weightx = 1;
-            panel.add(formGroup.getComponent(), c);
+            if (editable) {
+                panel.add(formGroup.getComponent(), c);
+            } else {
+                panel.add(new JLabel(formGroup.getReadOnlyValue()), c);
+            }
             c.gridy++;
             c.gridx = 0;
         }
     }
 
-    public JPanel getPanel() {
+    public JPanel getPanel(boolean editable) {
         setFormGroups();
-        drawPanel();
+        drawPanel(editable);
         return panel;
     }
 
@@ -96,5 +106,7 @@ public abstract class ViewModelPanelBuilder {
         }
         return 0;
     }
+    
+    public abstract PanelBuilderType getType();
 
 }

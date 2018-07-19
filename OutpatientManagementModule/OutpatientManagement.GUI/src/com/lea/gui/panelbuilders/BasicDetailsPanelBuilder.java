@@ -8,24 +8,23 @@ package com.lea.gui.panelbuilders;
 import com.lea.bll.datamanagers.DdlDataManager;
 import com.lea.bll.viewmodels.BasicDetailsVM;
 import com.lea.bll.viewmodels.ViewModel;
+import com.lea.gui.formgroups.EmailFormGroup;
 import com.lea.gui.formgroups.FormGroup;
-import com.lea.gui.formgroups.OptionTextFormGroup;
 import com.lea.gui.formgroups.OptionKeyValueFormGroup;
+import com.lea.gui.formgroups.PhoneFormGroup;
 import com.lea.gui.formgroups.TextFormGroup;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Lea
  */
-public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
+public abstract class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
 
-    public BasicDetailsVM viewModel;
-    public DdlDataManager ddlManager;
+    private BasicDetailsVM viewModel;
+    private final DdlDataManager ddlManager;
     private FormGroup firstName;
     private FormGroup middleName;
     private FormGroup lastName;
@@ -37,18 +36,11 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
     private FormGroup mobilePhone;
     private FormGroup email;
 
-    public BasicDetailsPanelBuilder(BasicDetailsVM viewModel) {
-        super("Basic Details", 400, 400);
+    public BasicDetailsPanelBuilder(String title, ViewModel viewModel) {
+        super(title, 400, 350);
         formGroups = new ArrayList<>();
         ddlManager = new DdlDataManager();
-        setModel(viewModel);
-    }
-
-    public BasicDetailsPanelBuilder(String title, BasicDetailsVM viewModel) {
-        super(title, 400, 400);
-        formGroups = new ArrayList<>();
-        ddlManager = new DdlDataManager();
-        setModel(viewModel);
+        this.viewModel = (BasicDetailsVM) viewModel;
     }
 
     @Override
@@ -68,34 +60,27 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
         fullStreet.setIsMandatory(true);
         formGroups.add(fullStreet);
 
-//        city = new OptionFormGroup("City", viewModel.getAllCities());
-//        formGroups.add(city);
-        
-        
         country = new OptionKeyValueFormGroup("Country", ddlManager.getAllCountries());
         country.setValue(1);
         formGroups.add(country);
-        
+
         city = new OptionKeyValueFormGroup("City", ddlManager.getAllCitiesByCountry(1));
         formGroups.add(city);
-        
+
         wireDdlActions();
 
         zipCode = new TextFormGroup("ZIP code");
         zipCode.setIsMandatory(true);
         formGroups.add(zipCode);
 
-//        country = new OptionFormGroup("Country", viewModel.getAllCountries());
-//        formGroups.add(country);
-
-        telephone = new TextFormGroup("Telephone");
+        telephone = new PhoneFormGroup("Telephone");
         telephone.setIsMandatory(true);
         formGroups.add(telephone);
 
-        mobilePhone = new TextFormGroup("Mobile phone");
+        mobilePhone = new PhoneFormGroup("Mobile phone");
         formGroups.add(mobilePhone);
 
-        email = new TextFormGroup("E-mail");
+        email = new EmailFormGroup("E-mail");
         formGroups.add(email);
 
         if (viewModel.getId() != 0) {
@@ -148,13 +133,11 @@ public class BasicDetailsPanelBuilder extends ViewModelPanelBuilder {
         if (ddlCountries.getModel().getSize() != 0) {
             ddlCountries.setSelectedIndex(0);
         }
-        ddlCountries.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedCountryId = (int)country.getValue();
-                ((OptionKeyValueFormGroup) city).resetOptions(ddlManager.getAllCitiesByCountry(selectedCountryId));
-            }
-        } );
+        ddlCountries.addActionListener((ActionEvent e) -> {
+            int selectedCountryId = (int) country.getValue();
+            ((OptionKeyValueFormGroup) city).resetOptions(ddlManager.getAllCitiesByCountry(selectedCountryId));
+        });
     }
+
 
 }

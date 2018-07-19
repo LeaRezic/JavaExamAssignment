@@ -1,7 +1,6 @@
 package com.lea.dal.domain.entities;
 // Generated 28.06.2018. 08:51:52 by Hibernate Tools 4.3.1
 
-
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -21,18 +20,18 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "Doctor",
-         schema = "dbo",
-         catalog = "VirgoHospitals",
-         uniqueConstraints = @UniqueConstraint(columnNames = "BasicDetailsID")
+        schema = "dbo",
+        catalog = "VirgoHospitals",
+        uniqueConstraints = @UniqueConstraint(columnNames = "BasicDetailsID")
 )
-public class Doctor extends EntityBase implements java.io.Serializable {
+public class Doctor implements EntityBase, java.io.Serializable {
 
     private int iddoctor;
     private BasicDetails basicDetails;
     private DoctorSpecialization doctorSpecialization;
     private String title;
     private boolean active;
-    private Set<Appointment> appointments = new HashSet<Appointment>(0);
+    private Set<Appointment> appointments = new HashSet<>(0);
 
     public Doctor() {
     }
@@ -53,7 +52,8 @@ public class Doctor extends EntityBase implements java.io.Serializable {
         this.appointments = appointments;
     }
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDDoctor", unique = true, nullable = false)
     public int getIddoctor() {
         return this.iddoctor;
@@ -108,6 +108,16 @@ public class Doctor extends EntityBase implements java.io.Serializable {
 
     public void setAppointments(Set<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    @Override
+    public int fetchEntityId() {
+        return getIddoctor();
+    }
+
+    @Override
+    public String toString() {
+        return title + " " + basicDetails.getFirstName() + " " + basicDetails.getLastName();
     }
 
 }

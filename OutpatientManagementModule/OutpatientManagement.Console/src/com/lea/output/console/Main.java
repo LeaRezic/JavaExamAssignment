@@ -5,13 +5,12 @@
  */
 package com.lea.output.console;
 
-import com.lea.bll.datamanagers.BasicDetailsManager;
 import com.lea.bll.datamanagers.DoctorManager;
-import com.lea.bll.viewmodels.BasicDetailsVM;
+import com.lea.bll.datamanagers.PatientManager;
 import com.lea.bll.viewmodels.DoctorVM;
+import com.lea.bll.viewmodels.PatientVM;
 import com.lea.dal.hibernate.HibernateUtil;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
 
 /**
  *
@@ -22,23 +21,34 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String[] args) {
-        DoctorManager doctorManager = new DoctorManager();
-        List<DoctorVM> doctors = new ArrayList<DoctorVM>();
-        doctors = doctorManager.getAll();
-        for (DoctorVM doctor : doctors) {
+
+        HibernateUtil.getSessionFactory();
+        printGap(50);
+
+        System.out.println("LISTNG ALL DOCTORS");
+        for (DoctorVM doctor : new DoctorManager().getAll()) {
             System.out.println(doctor.toString());
         }
-        
-        DoctorVM secondDoctor = doctorManager.getById(2);
-        System.out.println(secondDoctor.toString());
-        
-//        BasicDetailsVM someonesDetails = new BasicDetailsManager().getById(10);
-//        System.out.println(someonesDetails.toString());
+
+        printGap(1);
+
+        System.out.println("LISTNG ALL PATIENTS");
+        try {
+            for (PatientVM patient : new PatientManager().getAll()) {
+                System.out.println(patient.toString());
+            }
+        } catch (ParseException ex) {
+            System.out.println("An error occured while parsing data.");
+        }
         
         HibernateUtil.shutdown();
-        
     }
-    
+
+    public static void printGap(int n) {
+        for (int i = 0; i < n; i++) {
+            System.out.println("\n");
+        }
+    }
+
 }

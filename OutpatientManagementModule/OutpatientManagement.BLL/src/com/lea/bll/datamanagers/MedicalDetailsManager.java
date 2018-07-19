@@ -19,7 +19,7 @@ public class MedicalDetailsManager extends DataManager {
         return viewModel;
     }
     
-    public MedicalDetailsVM convertFromEntityToViewModel(MedicalDetails entity) {
+    MedicalDetailsVM convertFromEntityToViewModel(MedicalDetails entity) {
         MedicalDetailsVM viewModel = new MedicalDetailsVM(entity.getIdmedicalDetails());
         viewModel.setAllergiesCondition(entity.getAllergiesCondition());
         viewModel.setCardiacCondition(entity.getCardiacCondition());
@@ -30,6 +30,20 @@ public class MedicalDetailsManager extends DataManager {
         viewModel.setNeurologicalCondition(entity.getNeurologicalCondition());
         viewModel.setRespiratoryCondition(entity.getRespiratoryCondition());
         return viewModel;
+    }
+
+    MedicalDetails convertFromViewModelToEntity(MedicalDetailsVM viewModel) {
+        MedicalDetails entity = new MedicalDetails();
+        entity.setIdmedicalDetails(viewModel.getId());
+        entity.setAllergiesCondition(viewModel.getAllergiesCondition());
+        entity.setCardiacCondition(viewModel.getCardiacCondition());
+        entity.setDiabeticCondition(viewModel.getDiabeticCondition());
+        entity.setDigestiveCondition(viewModel.getDigestiveCondition());
+        entity.setHypertensiveCondition(viewModel.getHypertensiveCondition());
+        entity.setMuscularCondition(viewModel.getMuscularCondition());
+        entity.setNeurologicalCondition(viewModel.getNeurologicalCondition());
+        entity.setRespiratoryCondition(viewModel.getRespiratoryCondition());
+        return entity;
     }
     
 }

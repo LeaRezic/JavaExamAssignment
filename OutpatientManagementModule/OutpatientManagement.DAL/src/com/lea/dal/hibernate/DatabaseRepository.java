@@ -40,7 +40,7 @@ public class DatabaseRepository implements Repository {
     }
 
     private EntityBase getEntityByIdOfType(String className, int id) {
-        EntityBase entity = new EntityBase();
+        EntityBase entity = () -> 0;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
@@ -63,7 +63,7 @@ public class DatabaseRepository implements Repository {
     public Doctor getDoctorById(int id) {
         return (Doctor) getEntityByIdOfType(Doctor.class.getSimpleName(), id);
     }
-    
+
     @Override
     public List<Doctor> getAllDoctors() {
         return (ArrayList<Doctor>) getAllEntitiesOfType(Doctor.class.getSimpleName());
@@ -80,25 +80,34 @@ public class DatabaseRepository implements Repository {
     }
 
     @Override
-    public Boolean insertOrUpdatePatient(Patient p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Patient> getAllPatientsByDoctor(int id) {
+        List<Patient> patients = new ArrayList<>();
+        getAllPatients().forEach(p -> p.getAppointments()
+                .forEach(a -> {
+                    if (a.getDoctor().getIddoctor() == id) {
+                        patients.add(p);
+                    }
+                }));
+        return patients;
     }
 
-    
+    @Override
+    public Boolean insertOrUpdatePatient(Patient p) {
+        insertOrUpdateEntity(p.getBasicDetailsByBasicDetailsId());
+        insertOrUpdateEntity(p.getBasicDetailsByNextOfKinId());
+        insertOrUpdateEntity(p.getComplaintDetails());
+        insertOrUpdateEntity(p.getLifestyleDetails());
+        insertOrUpdateEntity(p.getMedicalDetails());
+        insertOrUpdateEntity(p.getPersonalDetails());
+        insertOrUpdateEntity(p);
+        return true;
+    }
 
     @Override
     public Boolean insertOrUpdateDoctor(Doctor d) {
-        
-        if (d.getIddoctor() == 0) {
-            int basicDetailsId = insertEntity(d.getBasicDetails());
-            d.setBasicDetails((BasicDetails) getEntityByIdOfType(BasicDetails.class.getSimpleName(),basicDetailsId));
-            insertEntity(d);
-        } else {
-            updateEntity(d.getBasicDetails());
-            updateEntity(d);
-        }
+        insertOrUpdateEntity(d.getBasicDetails());
+        insertOrUpdateEntity(d);
         return true;
-        
     }
 
     @Override
@@ -141,25 +150,14 @@ public class DatabaseRepository implements Repository {
         return (List<HospitalService>) getAllEntitiesOfType(HospitalService.class.getSimpleName());
     }
 
-//    private int insertEntity(EntityBase entity) {
-//        int newId = -1;
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        Transaction tx = null;
-//        try {
-//            tx = session.beginTransaction();
-//            newId = (int) session.save(entity);
-//            tx.commit();
-//        } catch (HibernateException ex) {
-//            if (tx != null) {
-//                tx.rollback();
-//            }
-//            ex.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
-//        return newId;
-//    }
-    
+    private void insertOrUpdateEntity(EntityBase entity) {
+        if (entity.fetchEntityId() == 0) {
+            insertEntity(entity);
+        } else {
+            updateEntity(entity);
+        }
+    }
+
     private int insertEntity(EntityBase entity) {
         int newId = -1;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -178,7 +176,7 @@ public class DatabaseRepository implements Repository {
         }
         return newId;
     }
-    
+
     private void updateEntity(EntityBase entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -197,17 +195,6 @@ public class DatabaseRepository implements Repository {
     }
 
     @Override
-    public void insertOrUpdateComplaintDetails(ComplaintDetails cd) {
-
-        if (cd.getIdcomplaintDetails() == 0) {
-            insertEntity(cd);
-        } else {
-            updateEntity(cd);
-        }
-        
-    }
-
-    @Override
     public List<City> getAllCities() {
         return (List<City>) getAllEntitiesOfType(City.class.getSimpleName());
     }
@@ -220,6 +207,59 @@ public class DatabaseRepository implements Repository {
     @Override
     public City getCityById(int id) {
         return (City) getEntityByIdOfType(City.class.getSimpleName(), id);
+    }
+
+    @Override
+    public BloodType getBloodTypeById(int id) {
+        return (BloodType) getEntityByIdOfType(BloodType.class.getSimpleName(), id);
+    }
+
+    @Override
+    public MaritalStatus getMaritalStatusById(int id) {
+        return (MaritalStatus) getEntityByIdOfType(MaritalStatus.class.getSimpleName(), id);
+    }
+
+    @Override
+    public DoctorSpecialization getDoctorSpecializationById(int id) {
+        return (DoctorSpecialization) getEntityByIdOfType(DoctorSpecialization.class.getSimpleName(), id);
+    }
+
+    @Override
+    public Boolean insertEmergencyRegistration(EmergencyRegistration er) {
+        insertOrUpdateEntity(er);
+        return true;
+    }
+
+    @Override
+    public void deleteEmergencyRegistration(EmergencyRegistration er) {
+        deleteEntity(er);
+    }
+
+    private void deleteEntity(EntityBase entity) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(entity);
+            tx.commit();
+        } catch (HibernateException ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public HospitalService getHospitalServiceById(int id) {
+        return (HospitalService) getEntityByIdOfType(HospitalService.class.getSimpleName(), id);
+    }
+
+    @Override
+    public Appointment getAppointmentById(int id) {
+        return (Appointment) getEntityByIdOfType(Appointment.class.getSimpleName(), id);
     }
 
 }

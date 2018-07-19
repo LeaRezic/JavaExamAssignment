@@ -28,7 +28,7 @@ public class TextFormGroup extends FormGroup {
 
     @Override
     public String getErrorMessage() {
-        return super.label.getText() + " is a mandatory field!";
+        return super.label.getText() + " is a mandatory field.";
     }
 
     @Override
@@ -44,6 +44,11 @@ public class TextFormGroup extends FormGroup {
     @Override
     public void setValue(Object value) {
         textField.setText((String) value);
+    }
+
+    @Override
+    public String getReadOnlyValue() {
+        return getValue().toString();
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package com.lea.bll.viewmodels;
 
+import com.lea.utilities.DateConverter;
 import java.util.Date;
 
 /**
@@ -12,47 +13,26 @@ import java.util.Date;
  * @author Lea
  */
 public class EmergencyRegistrationVM extends ViewModel {
-     private int patientId;
-     private Date registryDate;
-     private boolean patientSex;
-     private String briefComplaint;
-     private String patientFirstName;
-     private String patientMiddleName;
-     private String patientLastName;
-     private String relativeFirstName;
-     private String relativeMiddleName;
-     private String relativeLastName;
-     private String relationshipOfRelative;
-     private String patientContact;
-     private String relativeContact;
+
+    public enum Sex {
+        F, M
+    }
+
+    private Date registryDate;
+    private Sex patientSex;
+    private String briefComplaint;
+    private String patientFirstName;
+    private String patientMiddleName;
+    private String patientLastName;
+    private String relativeFirstName;
+    private String relativeMiddleName;
+    private String relativeLastName;
+    private String relationshipOfRelative;
+    private String patientContact;
+    private String relativeContact;
 
     public EmergencyRegistrationVM(int id) {
         super(id);
-    }
-
-    public EmergencyRegistrationVM(int idemergencyRegistration, int patientId, Date registryDate, boolean patientSex, String briefComplaint, String patientFirstName, String patientMiddleName, String patientLastName, String relativeFirstName, String relativeMiddleName, String relativeLastName, String relationshipOfRelative, String patientContact, String relativeContact) {
-        super(idemergencyRegistration);
-        this.patientId = patientId;
-        this.registryDate = registryDate;
-        this.patientSex = patientSex;
-        this.briefComplaint = briefComplaint;
-        this.patientFirstName = patientFirstName;
-        this.patientMiddleName = patientMiddleName;
-        this.patientLastName = patientLastName;
-        this.relativeFirstName = relativeFirstName;
-        this.relativeMiddleName = relativeMiddleName;
-        this.relativeLastName = relativeLastName;
-        this.relationshipOfRelative = relationshipOfRelative;
-        this.patientContact = patientContact;
-        this.relativeContact = relativeContact;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
     }
 
     public Date getRegistryDate() {
@@ -63,11 +43,11 @@ public class EmergencyRegistrationVM extends ViewModel {
         this.registryDate = registryDate;
     }
 
-    public boolean isPatientSex() {
+    public Sex getPatientSex() {
         return patientSex;
     }
 
-    public void setPatientSex(boolean patientSex) {
+    public void setPatientSex(Sex patientSex) {
         this.patientSex = patientSex;
     }
 
@@ -150,6 +130,10 @@ public class EmergencyRegistrationVM extends ViewModel {
     public void setRelativeContact(String relativeContact) {
         this.relativeContact = relativeContact;
     }
-     
-     
+
+    @Override
+    public String toString() {
+        return DateConverter.getStringFromDate(registryDate) + ", " + getPatientFirstName() + " " + getPatientLastName();
+    }
+
 }

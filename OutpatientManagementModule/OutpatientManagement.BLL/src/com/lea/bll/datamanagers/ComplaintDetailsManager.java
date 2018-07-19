@@ -19,17 +19,28 @@ public class ComplaintDetailsManager extends DataManager {
         return viewModel;
     }
     
-    public void saveChanges(ComplaintDetailsVM viewModel) {
-        repository.insertOrUpdateComplaintDetails(convertFromViewModelToEntity(viewModel));
+    public ComplaintDetailsVM createNew(boolean emergency) {
+        int id = emergency ? -1 : 0;
+        ComplaintDetailsVM viewModel = new ComplaintDetailsVM(id);
+        return viewModel;
     }
     
-    private ComplaintDetails convertFromViewModelToEntity(ComplaintDetailsVM viewModel) {
+    ComplaintDetails convertFromViewModelToEntity(ComplaintDetailsVM viewModel) {
         ComplaintDetails entity = new ComplaintDetails();
-        entity.setIdcomplaintDetails(viewModel.getId());
+        int id = viewModel.getId() == -1 ? 0 : viewModel.getId();
+        entity.setIdcomplaintDetails(id);
         entity.setComplaint(viewModel.getComplaint());
         entity.setTreatmentHistory(viewModel.getTreatmentHistory());
         entity.setTreatedAtHospital(viewModel.getTreatedAtHospital());
         return entity;
+    }
+
+    ComplaintDetailsVM convertFromEntityToViewModel(ComplaintDetails entity) {
+        ComplaintDetailsVM viewModel = new ComplaintDetailsVM(entity.getIdcomplaintDetails());
+        viewModel.setComplaint(entity.getComplaint());
+        viewModel.setTreatedAtHospital(entity.getTreatedAtHospital());
+        viewModel.setTreatmentHistory(entity.getTreatmentHistory());
+        return viewModel;
     }
     
 }

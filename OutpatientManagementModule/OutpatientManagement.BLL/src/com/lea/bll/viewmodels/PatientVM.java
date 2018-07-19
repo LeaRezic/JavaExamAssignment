@@ -5,8 +5,6 @@
  */
 package com.lea.bll.viewmodels;
 
-import java.util.Date;
-
 /**
  *
  * @author Lea
@@ -23,17 +21,6 @@ public class PatientVM extends ViewModel {
 
     public PatientVM(int id) {
         super(id);
-    }
-
-    public PatientVM(int idpatient, PatientDetailsVM patientDetails, BasicDetailsVM basicDetailsByNextOfKinId, BasicDetailsVM basicDetailsByBasicDetailsId, ComplaintDetailsVM complaintDetails, LifestyleDetailsVM lifestyleDetails, MedicalDetailsVM medicalDetails, PersonalDetailsVM personalDetails) {
-        super(idpatient);
-        this.patientDetails = patientDetails;
-        this.basicDetailsByNextOfKinId = basicDetailsByNextOfKinId;
-        this.basicDetailsByBasicDetailsId = basicDetailsByBasicDetailsId;
-        this.complaintDetails = complaintDetails;
-        this.lifestyleDetails = lifestyleDetails;
-        this.medicalDetails = medicalDetails;
-        this.personalDetails = personalDetails;
     }
 
     public PatientDetailsVM getPatientDetails() {
@@ -90,6 +77,11 @@ public class PatientVM extends ViewModel {
 
     public void setPersonalDetails(PersonalDetailsVM personalDetails) {
         this.personalDetails = personalDetails;
+    }
+
+    @Override
+    public String toString() {
+        return basicDetailsByBasicDetailsId.getFirstName() + " " + basicDetailsByBasicDetailsId.getLastName();
     }
 
 }

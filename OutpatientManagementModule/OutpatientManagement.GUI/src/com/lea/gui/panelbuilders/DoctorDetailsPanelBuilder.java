@@ -27,10 +27,10 @@ public class DoctorDetailsPanelBuilder extends ViewModelPanelBuilder {
     private FormGroup active;
     private static final DdlDataManager DDL_MANAGER = new DdlDataManager();
 
-    public DoctorDetailsPanelBuilder(DoctorDetailsVM viewModel) {
+    public DoctorDetailsPanelBuilder(ViewModel viewModel) {
         super("Employment details", 400, 120);
         formGroups = new ArrayList<>();
-        this.viewModel = viewModel;
+        this.viewModel = (DoctorDetailsVM) viewModel;
     }
 
     @Override
@@ -73,6 +73,11 @@ public class DoctorDetailsPanelBuilder extends ViewModelPanelBuilder {
         doctorTitle.setValue(viewModel.getTitle());
         profession.setValue(viewModel.getProfession());
         active.setValue(viewModel.isActive() ? "YES" : "NO");
+    }
+
+    @Override
+    public PanelBuilderType getType() {
+        return PanelBuilderType.DOCTORDETAILS;
     }
 
 }

@@ -39,13 +39,11 @@ public class OptionKeyValueFormGroup extends FormGroup {
     }
 
     private void setComboBoxOptions(List<OptionKeyValue> options) {
-
         comboModel = new DefaultComboBoxModel<>();
         options.forEach((option) -> {
             comboModel.addElement(option);
         });
         comboBox.setModel(comboModel);
-
     }
 
     @Override
@@ -62,6 +60,11 @@ public class OptionKeyValueFormGroup extends FormGroup {
             int index = options.indexOf(okv);
             comboBox.setSelectedIndex(index);
         }
+    }
+
+    @Override
+    public String getReadOnlyValue() {
+        return ((OptionKeyValue) comboBox.getSelectedItem()).getValue();
     }
 
 }

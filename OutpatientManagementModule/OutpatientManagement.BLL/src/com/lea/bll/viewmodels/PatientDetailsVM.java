@@ -12,22 +12,15 @@ import java.util.Date;
  * @author Lea
  */
 public class PatientDetailsVM extends ViewModel {
-    
-     private String opid;
-     private Date fullRegistrationDate;
-     private String nextOfKinRelationship;
+
+    private String opid;
+    private Date fullRegistrationDate;
+    private String nextOfKinRelationship;
 
     public PatientDetailsVM() {
         super(0);
     }
 
-    public PatientDetailsVM(String opid, Date fullRegistrationDate, String nextOfKinRelationship) {
-        super(0);
-        this.opid = opid;
-        this.fullRegistrationDate = fullRegistrationDate;
-        this.nextOfKinRelationship = nextOfKinRelationship;
-    }
-    
     public String getOpid() {
         return opid;
     }
@@ -51,7 +44,5 @@ public class PatientDetailsVM extends ViewModel {
     public void setNextOfKinRelationship(String nextOfKinRelationship) {
         this.nextOfKinRelationship = nextOfKinRelationship;
     }
-     
-    
-    
+
 }

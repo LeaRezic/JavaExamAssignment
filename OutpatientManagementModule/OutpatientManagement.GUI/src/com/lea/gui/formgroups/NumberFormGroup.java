@@ -25,12 +25,12 @@ public class NumberFormGroup extends FormGroup {
 
     @Override
     public Boolean isValid() {
-        return ((int)spinner.getValue()) <= maxValue;
+        return isNumber();
     }
 
     @Override
     public String getErrorMessage() {
-        return super.label.getText() + " value must be under or equal to " + maxValue;
+        return super.label.getText() + " must be a number between 0 and " + maxValue;
     }
 
     @Override
@@ -46,6 +46,20 @@ public class NumberFormGroup extends FormGroup {
     @Override
     public void setValue(Object value) {
         spinner.setValue((int) value);
+    }
+
+    @Override
+    public String getReadOnlyValue() {
+        return getValue().toString();
+    }
+    
+    private boolean isNumber() {
+        try {
+            int value = Integer.parseInt(getReadOnlyValue());
+            return value >= 0 && value <= maxValue;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
     
 }

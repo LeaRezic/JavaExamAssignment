@@ -12,29 +12,22 @@ import java.math.BigDecimal;
  * @author Lea
  */
 public class HospitalServiceVM extends ViewModel {
-     private HospitalServiceCategoryVM hospitalServiceCategory;
-     private String name;
-     private String description;
-     private BigDecimal basicPrice;
+
+    private int categoryId;
+    private String name;
+    private String description;
+    private BigDecimal basicPrice;
 
     public HospitalServiceVM(int id) {
         super(id);
     }
 
-    public HospitalServiceVM(int idhospitalService, HospitalServiceCategoryVM hospitalServiceCategory, String name, String description, BigDecimal basicPrice) {
-        super(idhospitalService);
-        this.hospitalServiceCategory = hospitalServiceCategory;
-        this.name = name;
-        this.description = description;
-        this.basicPrice = basicPrice;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public HospitalServiceCategoryVM getHospitalServiceCategory() {
-        return hospitalServiceCategory;
-    }
-
-    public void setHospitalServiceCategory(HospitalServiceCategoryVM hospitalServiceCategory) {
-        this.hospitalServiceCategory = hospitalServiceCategory;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -60,6 +53,5 @@ public class HospitalServiceVM extends ViewModel {
     public void setBasicPrice(BigDecimal basicPrice) {
         this.basicPrice = basicPrice;
     }
-     
-     
+
 }

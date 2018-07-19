@@ -19,7 +19,7 @@ import javax.persistence.Table;
          schema = "dbo",
          catalog = "VirgoHospitals"
 )
-public class BasicDetails extends EntityBase implements java.io.Serializable {
+public class BasicDetails implements EntityBase, java.io.Serializable {
 
     private int idbasicDetails;
     private City city;
@@ -148,6 +148,11 @@ public class BasicDetails extends EntityBase implements java.io.Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public int fetchEntityId() {
+        return getIdbasicDetails();
     }
 
 }

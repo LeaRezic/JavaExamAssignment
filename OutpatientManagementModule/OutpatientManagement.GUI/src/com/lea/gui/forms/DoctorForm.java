@@ -9,105 +9,41 @@ import com.lea.bll.datamanagers.DoctorManager;
 import com.lea.bll.viewmodels.BasicDetailsVM;
 import com.lea.bll.viewmodels.DoctorDetailsVM;
 import com.lea.bll.viewmodels.DoctorVM;
-import com.lea.gui.panelbuilders.BasicDetailsPanelBuilder;
-import com.lea.gui.panelbuilders.DoctorDetailsPanelBuilder;
-import com.lea.gui.panelbuilders.ViewModelPanelBuilder;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import com.lea.gui.panelbuilders.PanelBuilderFactory;
+import com.lea.gui.panelbuilders.PanelBuilderType;
 
 /**
  *
  * @author Lea
  */
-public class DoctorForm extends JFrame {
+public class DoctorForm extends ViewModelForm {
 
-    private JPanel contentPane;
-    private JButton btnAdd;
-    private ViewModelPanelBuilder basicDetailsPanelBuilder;
-    private ViewModelPanelBuilder doctorPanelBuilder;
-
-    public boolean actionSuccessfullyPerformed;
-
-//    public DoctorForm() {
-//        super("Testiranje - DOCTOR INSERT ");
-//        initComponents();
-//        drawForm();
-//    }
-    public DoctorForm(DoctorVM doctor) {
-        super("Testiranje - DOCTOR INSERT ");
-        actionSuccessfullyPerformed = false;
-        initComponents(doctor);
-        drawForm();
+    public DoctorForm(DoctorVM doctor, boolean editable) {
+        super("Doctor form", doctor, editable);
     }
 
-    private void initComponents(DoctorVM doctor) {
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        contentPane = new JPanel();
-        btnAdd = new JButton();
-        doctorPanelBuilder = new DoctorDetailsPanelBuilder(doctor.getDoctorDetails());
-        //doctorPanelBuilder.setModel(doctor.getDoctorDetails());
-        basicDetailsPanelBuilder = new BasicDetailsPanelBuilder(doctor.getBasicDetails());
-        //basicDetailsPanelBuilder.setModel(doctor.getBasicDetails());
-
-        btnAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String errorMessage = "";
-
-                if (!basicDetailsPanelBuilder.isValid()) {
-                    errorMessage += "Error in Basic details";
-                    errorMessage += "\n" + basicDetailsPanelBuilder.getErrorMessage();
-                    JOptionPane.showMessageDialog(null, errorMessage.equals("") ? "OK" : errorMessage);
-                } else {
-                    doctor.setBasicDetails((BasicDetailsVM) basicDetailsPanelBuilder.getModel());
-                    doctor.setDoctorDetails((DoctorDetailsVM) doctorPanelBuilder.getModel());
-                    new DoctorManager().saveChanges((doctor));
-                    actionSuccessfullyPerformed = true;
-                    exit();
-                }
-                //JOptionPane.showMessageDialog(null, errorMessage.equals("") ? "OK" : errorMessage);
-
-            }
-        });
-        btnAdd.setText("Save");
+    @Override
+    public void fillPanelBuilderList() {
+        DoctorVM doctor = (DoctorVM) viewModel;
+        panelBuilders.add(PanelBuilderFactory.getInstance(PanelBuilderType.BASICDETAILS_DOCTOR, doctor.getBasicDetails()));
+        panelBuilders.add(PanelBuilderFactory.getInstance(PanelBuilderType.DOCTORDETAILS, doctor.getDoctorDetails()));
     }
 
-    public void exit() {
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    @Override
+    public void updateViewModel() {
+        DoctorVM doctor = (DoctorVM) viewModel;
+        doctor.setBasicDetails((BasicDetailsVM) getModelFromPanel(PanelBuilderType.BASICDETAILS_DOCTOR));
+        doctor.setDoctorDetails((DoctorDetailsVM) getModelFromPanel(PanelBuilderType.DOCTORDETAILS));
     }
 
-    public boolean isSuccessful() {
-        return actionSuccessfullyPerformed;
+    @Override
+    public void saveChanges() {
+        new DoctorManager().saveChanges((DoctorVM) viewModel);
     }
 
-    private void drawForm() {
-
-        FlowLayout layout = new FlowLayout();
-
-        contentPane.setLayout(layout);
-
-        contentPane.add(basicDetailsPanelBuilder.getPanel());
-        contentPane.add(doctorPanelBuilder.getPanel());
-
-        JPanel buttonPlaceHolder = new JPanel();
-        buttonPlaceHolder.setBorder(new EmptyBorder(0, 300, 0, 0));
-        buttonPlaceHolder.add(btnAdd);
-        contentPane.add(buttonPlaceHolder);
-        setContentPane(contentPane);
-        int height = (basicDetailsPanelBuilder.getNumberOfFormGroups() + doctorPanelBuilder.getNumberOfFormGroups()) * 48;
-        contentPane.setPreferredSize(new Dimension(450, height));
-        this.setResizable(false);
-        pack();
-
+    @Override
+    public ViewModelFormType getFormType() {
+        return ViewModelFormType.DOCTOR;
     }
 
 }

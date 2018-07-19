@@ -5,6 +5,16 @@
  */
 package com.lea.gui.cards;
 
+import com.lea.bll.datamanagers.DdlDataManager;
+import com.lea.bll.datamanagers.PatientManager;
+import com.lea.bll.datamanagers.ReceiptManager;
+import com.lea.utilities.OptionKeyValue;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lea
@@ -14,8 +24,17 @@ public class AppointmentCard extends javax.swing.JPanel {
     /**
      * Creates new form AppointmentCard
      */
+    private static final DdlDataManager DDL_MANAGER = new DdlDataManager();
+    private static final ReceiptManager DATA_MANAGER = new ReceiptManager();
+
     public AppointmentCard() {
         initComponents();
+        loadMedicine();
+        loadLaboratoryTests();
+        addedServices = new ArrayList<>();
+        loadServicesList();
+        loadAppointmentsList();
+        configureRadioButtons();
     }
 
     /**
@@ -27,7 +46,26 @@ public class AppointmentCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        appointmentsList = new javax.swing.JList();
+        btnGenerateReceipt = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        rbFollowUpConsultation = new javax.swing.JRadioButton();
+        rbBasicConsultation = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cbMedicine = new javax.swing.JComboBox();
+        cbLaboratoryTests = new javax.swing.JComboBox();
+        btnAddMedicine = new javax.swing.JButton();
+        btnAddTest = new javax.swing.JButton();
+        btnIssueReceipt = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        servicesList = new javax.swing.JList();
+        rbExaminationConsultation = new javax.swing.JRadioButton();
+        btnDeleteServices = new javax.swing.JButton();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 61, 61), 1, true));
         setPreferredSize(new java.awt.Dimension(730, 400));
@@ -36,26 +74,273 @@ public class AppointmentCard extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(53, 112, 11));
         jLabel1.setText("APPOINTMENTS");
 
+        appointmentsList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(appointmentsList);
+
+        btnGenerateReceipt.setText("Generate receipt");
+        btnGenerateReceipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateReceiptActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(53, 112, 11));
+        jLabel3.setText("Issue a receipt:");
+
+        jLabel4.setText("Consultation type:");
+
+        btnGroup.add(rbFollowUpConsultation);
+        rbFollowUpConsultation.setText("Follow-up");
+
+        btnGroup.add(rbBasicConsultation);
+        rbBasicConsultation.setText("Basic");
+
+        jLabel5.setText("Medicine:");
+
+        jLabel6.setText("Laboratory tests:");
+
+        cbMedicine.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbLaboratoryTests.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnAddMedicine.setText("Add");
+        btnAddMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMedicineActionPerformed(evt);
+            }
+        });
+
+        btnAddTest.setText("Add");
+        btnAddTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTestActionPerformed(evt);
+            }
+        });
+
+        btnIssueReceipt.setText("Issue new receipt");
+        btnIssueReceipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIssueReceiptActionPerformed(evt);
+            }
+        });
+
+        servicesList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(servicesList);
+
+        btnGroup.add(rbExaminationConsultation);
+        rbExaminationConsultation.setText("Examinaton");
+
+        btnDeleteServices.setText("Clear services");
+        btnDeleteServices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteServicesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jLabel1)
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(btnGenerateReceipt)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDeleteServices)
+                        .addGap(98, 98, 98)
+                        .addComponent(btnIssueReceipt))
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbBasicConsultation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbFollowUpConsultation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbExaminationConsultation))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel5))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(2, 2, 2)
+                                    .addComponent(cbLaboratoryTests, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cbMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnAddTest)
+                                .addComponent(btnAddMedicine)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGenerateReceipt))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel3)
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(rbBasicConsultation)
+                            .addComponent(rbFollowUpConsultation)
+                            .addComponent(rbExaminationConsultation))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(btnAddMedicine))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(btnAddTest)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbLaboratoryTests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnIssueReceipt)
+                            .addComponent(btnDeleteServices))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMedicineActionPerformed
+        int index = ((OptionKeyValue) cbMedicine.getSelectedItem()).getKey();
+        if (index != -1) {
+            addedServices.add((OptionKeyValue) cbMedicine.getSelectedItem());
+            loadServicesList();
+        }
+    }//GEN-LAST:event_btnAddMedicineActionPerformed
+
+    private void btnAddTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTestActionPerformed
+        int index = ((OptionKeyValue) cbLaboratoryTests.getSelectedItem()).getKey();
+        if (index != -1) {
+            addedServices.add((OptionKeyValue) cbLaboratoryTests.getSelectedItem());
+            loadServicesList();
+        }
+    }//GEN-LAST:event_btnAddTestActionPerformed
+
+    private void btnDeleteServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteServicesActionPerformed
+        addedServices.clear();
+        loadServicesList();
+    }//GEN-LAST:event_btnDeleteServicesActionPerformed
+
+    private void btnIssueReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIssueReceiptActionPerformed
+        // TODO add your handling code here:
+        int idConsultation = Integer.parseInt(btnGroup.getSelection().getActionCommand());
+        JOptionPane.showMessageDialog(null, DATA_MANAGER.getReceiptOutput(addedServices, idConsultation));
+        addedServices.clear();
+        loadServicesList();
+    }//GEN-LAST:event_btnIssueReceiptActionPerformed
+
+    private void btnGenerateReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateReceiptActionPerformed
+        int index = ((OptionKeyValue) appointmentsList.getSelectedValue()).getKey();
+        JOptionPane.showMessageDialog(null, DATA_MANAGER.getReceiptOutputFromAppointment(index));
+    }//GEN-LAST:event_btnGenerateReceiptActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList appointmentsList;
+    private javax.swing.JButton btnAddMedicine;
+    private javax.swing.JButton btnAddTest;
+    private javax.swing.JButton btnDeleteServices;
+    private javax.swing.JButton btnGenerateReceipt;
+    private javax.swing.ButtonGroup btnGroup;
+    private javax.swing.JButton btnIssueReceipt;
+    private javax.swing.JComboBox cbLaboratoryTests;
+    private javax.swing.JComboBox cbMedicine;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton rbBasicConsultation;
+    private javax.swing.JRadioButton rbExaminationConsultation;
+    private javax.swing.JRadioButton rbFollowUpConsultation;
+    private javax.swing.JList servicesList;
     // End of variables declaration//GEN-END:variables
+
+    private DefaultComboBoxModel<OptionKeyValue> cbMedicineModel;
+    private DefaultComboBoxModel<OptionKeyValue> cbLabTestsModel;
+    private DefaultListModel<OptionKeyValue> listAppointmentsModel;
+    private DefaultListModel<OptionKeyValue> listServicesModel;
+    private final List<OptionKeyValue> addedServices;
+
+    private void loadMedicine() {
+        cbMedicineModel = new DefaultComboBoxModel<>();
+        cbMedicineModel.addElement(new OptionKeyValue(-1, "  - - - choose - - -"));
+        DDL_MANAGER.getAllMedicine()
+                .forEach((option) -> {
+                    cbMedicineModel.addElement(option);
+                });
+        cbMedicine.setModel(cbMedicineModel);
+    }
+
+    private void loadLaboratoryTests() {
+        cbLabTestsModel = new DefaultComboBoxModel<>();
+        cbLabTestsModel.addElement(new OptionKeyValue(-1, "  - - - choose - - -"));
+        DDL_MANAGER.getAllLaboratoryTests()
+                .forEach((option) -> {
+                    cbLabTestsModel.addElement(option);
+                });
+        cbLaboratoryTests.setModel(cbLabTestsModel);
+    }
+
+    private void loadServicesList() {
+        listServicesModel = new DefaultListModel<>();
+        if (!addedServices.isEmpty()) {
+            addedServices.forEach(s -> listServicesModel.addElement(s));
+        }
+        servicesList.setModel(listServicesModel);
+        if (!listServicesModel.isEmpty()) {
+            servicesList.setSelectedIndex(0);
+        }
+    }
+
+    private void loadAppointmentsList() {
+        listAppointmentsModel = new DefaultListModel<>();
+        DDL_MANAGER.getAllAppointments().forEach(a -> listAppointmentsModel.addElement(a));
+        appointmentsList.setModel(listAppointmentsModel);
+        if (!listAppointmentsModel.isEmpty()) {
+            appointmentsList.setSelectedIndex(0);
+        }
+    }
+
+    private void configureRadioButtons() {
+        rbBasicConsultation.setActionCommand("7");
+        rbBasicConsultation.setSelected(true);
+        rbFollowUpConsultation.setActionCommand("8");
+        rbExaminationConsultation.setActionCommand("9");
+    }
 }

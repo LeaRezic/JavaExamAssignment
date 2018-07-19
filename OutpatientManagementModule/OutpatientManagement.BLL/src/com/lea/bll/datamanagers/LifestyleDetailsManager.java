@@ -19,7 +19,7 @@ public class LifestyleDetailsManager extends DataManager {
         return viewModel;
     }
     
-    public LifestyleDetailsVM convertFromEntityToViewModel(LifestyleDetails entity) {
+    LifestyleDetailsVM convertFromEntityToViewModel(LifestyleDetails entity) {
         LifestyleDetailsVM viewModel = new LifestyleDetailsVM(entity.getIdlifestyleDetails());
         viewModel.setAlcoholicDrinksPerDay(entity.getAlcoholicDrinksPerDay());
         viewModel.setCigaretsPerDay(entity.getCigaretsPerDay());
@@ -30,7 +30,7 @@ public class LifestyleDetailsManager extends DataManager {
         return viewModel;
     }
     
-    public LifestyleDetails convertFromViewModelToEntity(LifestyleDetailsVM viewModel) {
+    LifestyleDetails convertFromViewModelToEntity(LifestyleDetailsVM viewModel) {
         LifestyleDetails entity = new LifestyleDetails();
         entity.setIdlifestyleDetails(viewModel.getId());
         entity.setAlcoholicDrinksPerDay(viewModel.getAlcoholicDrinksPerDay());

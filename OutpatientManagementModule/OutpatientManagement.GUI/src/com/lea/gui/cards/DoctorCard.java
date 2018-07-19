@@ -9,12 +9,8 @@ import com.lea.bll.datamanagers.DdlDataManager;
 import com.lea.bll.datamanagers.DoctorManager;
 import com.lea.gui.forms.DoctorForm;
 import com.lea.utilities.OptionKeyValue;
-import java.awt.Component;
-import java.awt.Container;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -102,20 +98,23 @@ public class DoctorCard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbProfessions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbProfessions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(382, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAddDoctor)
-                        .addGap(117, 117, 117)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditDoctor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnViewDoctor))
-                    .addComponent(jScrollPane2))
-                .addContainerGap(402, Short.MAX_VALUE))
+                        .addComponent(btnViewDoctor)
+                        .addGap(421, 421, 421))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +137,7 @@ public class DoctorCard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDoctorActionPerformed
-        DoctorForm form = new DoctorForm(DOCTOR_MANAGER.createNew());
+        DoctorForm form = new DoctorForm(DOCTOR_MANAGER.createNew(), true);
         //DoctorForm form = new DoctorForm(doctorManager.getById(9));
         form.setLocationRelativeTo(null);
         form.setVisible(true);
@@ -154,10 +153,34 @@ public class DoctorCard extends javax.swing.JPanel {
         });
     }//GEN-LAST:event_btnAddDoctorActionPerformed
 
+    private void btnEditDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDoctorActionPerformed
+        // TODO add your handling code here:
+        int index = ((OptionKeyValue)listDoctors.getSelectedValue()).getKey();
+        DoctorForm form = new DoctorForm(DOCTOR_MANAGER.getById(index), true);
+        //setEnabled(form, false);
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);
+        form.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                if (form.isSuccessful()) {
+                    cbProfessions.setSelectedIndex(0);
+                    resetDoctorsList();
+                }
+                e.getWindow().dispose();
+            }
+        });
+    }//GEN-LAST:event_btnEditDoctorActionPerformed
+
+    private void cbProfessionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProfessionsActionPerformed
+        // TODO add your handling code here:
+        resetDoctorsList();
+    }//GEN-LAST:event_cbProfessionsActionPerformed
+
     private void btnViewDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDoctorActionPerformed
         // TODO add your handling code here:
         int index = ((OptionKeyValue)listDoctors.getSelectedValue()).getKey();
-        DoctorForm form = new DoctorForm(DOCTOR_MANAGER.getById(index));
+        DoctorForm form = new DoctorForm(DOCTOR_MANAGER.getById(index), false);
         //setEnabled(form, false);
         form.setLocationRelativeTo(null);
         form.setVisible(true);
@@ -173,16 +196,6 @@ public class DoctorCard extends javax.swing.JPanel {
         });
     }//GEN-LAST:event_btnViewDoctorActionPerformed
 
-    private void cbProfessionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProfessionsActionPerformed
-        // TODO add your handling code here:
-        resetDoctorsList();
-    }//GEN-LAST:event_cbProfessionsActionPerformed
-
-    private void btnEditDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDoctorActionPerformed
-        // TODO add your handling code here:
-        cbProfessions.setSelectedIndex(0);
-    }//GEN-LAST:event_btnEditDoctorActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddDoctor;
@@ -197,17 +210,6 @@ public class DoctorCard extends javax.swing.JPanel {
 
     private DefaultComboBoxModel<OptionKeyValue> cbProfessionsModel;
     private DefaultListModel<OptionKeyValue> listDoctorsModel;
-
-//    private void setEnabled(Component component, boolean enabled) {
-//        if (!(component instanceof JButton)) {
-//            component.setEnabled(enabled);
-//        }
-//        if (component instanceof Container) {
-//            for (Component child : ((Container) component).getComponents()) {
-//                setEnabled(child, enabled);
-//            }
-//        }
-//    }
 
     private void loadProfessions() {
         cbProfessionsModel = new DefaultComboBoxModel<>();

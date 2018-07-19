@@ -16,10 +16,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -51,44 +47,38 @@ public class OutpatientManagementGuiApp extends JFrame {
     // images
 
     private enum AppIcon {
-        LOGO, PATIENT_GRAY, PATIENT_GREEN, DOCTOR_GREEN, DOCTOR_GRAY,
-        APPOINTMENT_GREEN, APPOINTMENT_GRAY, STATISTICS_GREEN, STATISTICS_GRAY
-    }
+        LOGO("resources/first-aid.png"),
+        PATIENT_GRAY("resources/patient_gray.png"),
+        PATIENT_GREEN("resources/patient_green.png"),
+        DOCTOR_GRAY("resources/doctor_gray.png"),
+        DOCTOR_GREEN("resources/doctor_green.png"),
+        APPOINTMENT_GRAY("resources/appointment_gray.png"),
+        APPOINTMENT_GREEN("resources/appointment_green.png"),
+        STATISTICS_GRAY("resources/report_gray.png"),
+        STATISTICS_GREEN("resources/report_green.png");
 
-    private final Map<Integer, String> imagesMap = new HashMap<>();
-    private static final List<ImageIcon> IMAGE_ICONS = new ArrayList<>();
+        private final String resourcePath;
+
+        private AppIcon(String resourcePath) {
+            this.resourcePath = resourcePath;
+        }
+
+        public ImageIcon getImageIcon() {
+            return new ImageIcon(getClass().getClassLoader().getResource(this.resourcePath));
+        }
+    }
 
     public OutpatientManagementGuiApp() {
         super("Outpatient Management");
-        loadImages();
         configureFrame();
         initComponents();
         drawFrame();
     }
 
-    private void loadImages() {
-        
-        imagesMap.put(AppIcon.LOGO.ordinal(), "resources/first-aid.png");
-        imagesMap.put(AppIcon.PATIENT_GREEN.ordinal(), "resources/patient_green.png");
-        imagesMap.put(AppIcon.PATIENT_GRAY.ordinal(), "resources/patient_gray.png");
-        imagesMap.put(AppIcon.STATISTICS_GRAY.ordinal(), "resources/report_gray.png");
-        imagesMap.put(AppIcon.STATISTICS_GREEN.ordinal(), "resources/report_green.png");
-        imagesMap.put(AppIcon.DOCTOR_GRAY.ordinal(), "resources/doctor_gray.png");
-        imagesMap.put(AppIcon.DOCTOR_GREEN.ordinal(), "resources/doctor_green.png");
-        imagesMap.put(AppIcon.APPOINTMENT_GRAY.ordinal(), "resources/appointment_gray.png");
-        imagesMap.put(AppIcon.APPOINTMENT_GREEN.ordinal(), "resources/appointment_green.png");
-
-        imagesMap.entrySet().forEach((entry) -> {
-            int keyIndex = entry.getKey();
-            String value = entry.getValue();
-            IMAGE_ICONS.add(keyIndex, new ImageIcon(getClass().getClassLoader().getResource(value)));
-        });
-    }
-
     private void configureFrame() {
         this.setSize(900, 500);
         this.setResizable(false);
-        this.setIconImage((getAppIcon(AppIcon.LOGO)).getImage());
+        this.setIconImage(AppIcon.LOGO.getImageIcon().getImage());
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -100,7 +90,7 @@ public class OutpatientManagementGuiApp extends JFrame {
     }
 
     private void initComponents() {
-        // content pane and menu bar
+        // content pane
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(20, 20, 5, 20));
         // side navigation
@@ -110,7 +100,7 @@ public class OutpatientManagementGuiApp extends JFrame {
         mainContent.setLayout(new CardLayout());
         // footer label
         loadFooterLabel();
-        // za doctor card
+        // za card-ove
         loadCards();
     }
 
@@ -132,29 +122,25 @@ public class OutpatientManagementGuiApp extends JFrame {
         sideMenuPanel.setBorder(new EmptyBorder(0, 0, 0, 20));
         sideMenuPanel.setLayout(new GridLayout(4, 1, 0, 0));
         // gumbeki za side menu
-
         patientButton = new JButton();
         configButton(patientButton, AppIcon.PATIENT_GRAY, AppIcon.PATIENT_GREEN, "Manage patient records", PATIENTS_CARD);
-
         doctorButton = new JButton();
         configButton(doctorButton, AppIcon.DOCTOR_GRAY, AppIcon.DOCTOR_GREEN, "Manage doctors", DOCTORS_CARD);
-
         appointmentButton = new JButton();
         configButton(appointmentButton, AppIcon.APPOINTMENT_GRAY, AppIcon.APPOINTMENT_GREEN, "Manage appointments", APPOINTMENTS_CARD);
-
         statisticsButton = new JButton();
         configButton(statisticsButton, AppIcon.STATISTICS_GRAY, AppIcon.STATISTICS_GREEN, "View reports", STATISTICS_CARD);
-
+        // ubacivanje u panel
         sideMenuPanel.add(patientButton);
         sideMenuPanel.add(doctorButton);
         sideMenuPanel.add(appointmentButton);
         sideMenuPanel.add(statisticsButton);
     }
-    
+
     private void configButton(JButton btn, AppIcon iconNormal, AppIcon iconHover, String toolTipText, String cardAction) {
         btn.setPreferredSize(new Dimension(70, 50));
-        btn.setIcon(getAppIcon(iconNormal));
-        btn.setRolloverIcon(getAppIcon(iconHover));
+        btn.setIcon(iconNormal.getImageIcon());
+        btn.setRolloverIcon(iconHover.getImageIcon());
         btn.setBorder(null);
         btn.setFocusPainted(false);
         btn.setContentAreaFilled(false);
@@ -164,13 +150,9 @@ public class OutpatientManagementGuiApp extends JFrame {
             cl.show(mainContent, cardAction);
         });
     }
-    
-    private ImageIcon getAppIcon(AppIcon icon) {
-        return IMAGE_ICONS.get(icon.ordinal());
-    }
 
     private void loadFooterLabel() {
-        footerLabel = new JLabel(" © VIRGO HOSPITALS - Outpatient Management");
+        footerLabel = new JLabel(FOOTER_TEXT);
         footerLabel.setBorder(new EmptyBorder(10, 0, 0, 0));
         footerLabel.setForeground(CUSTOM_GREEN);
     }
@@ -185,12 +167,13 @@ public class OutpatientManagementGuiApp extends JFrame {
         statisticsCard = new StatisticsCard();
         mainContent.add(statisticsCard, STATISTICS_CARD);
     }
-    
-    
+
+    // konstante
     private static final String STATISTICS_CARD = "statistics";
     private static final String APPOINTMENTS_CARD = "appointments";
     private static final String DOCTORS_CARD = "doctors";
     private static final String PATIENTS_CARD = "patients";
+    private static final String FOOTER_TEXT = " © VIRGO HOSPITALS - Outpatient Management";
     private static final Color CUSTOM_GREEN = new Color(53, 112, 11);
 
 }

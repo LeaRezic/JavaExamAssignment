@@ -63,13 +63,7 @@ public final class DoctorManager extends DataManager {
         entity.setBasicDetails(basicDetailsManager.convertFromViewModelToEntity(viewModel.getBasicDetails()));
         entity.setActive(viewModel.getDoctorDetails().isActive());
         entity.setTitle(viewModel.getDoctorDetails().getTitle());
-
-        repository.getAllDoctorSpecializations()
-                .stream()
-                .filter(s -> s.getIddoctorSpecialization() == viewModel.getDoctorDetails().getProfession())
-                .findFirst()
-                .ifPresent(s -> entity.setDoctorSpecialization(s));
-
+        entity.setDoctorSpecialization(repository.getDoctorSpecializationById(viewModel.getDoctorDetails().getProfession()));
         return entity;
     }
 

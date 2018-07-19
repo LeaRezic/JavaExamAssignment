@@ -14,11 +14,14 @@ import com.lea.dal.domain.entities.BasicDetails;
  */
 public class BasicDetailsManager extends DataManager {
 
-//    public BasicDetailsVM getById(int id) {
-//        return convertFromEntityToViewModel(repository.getBasicDetailsById(id));
-//    }
     public BasicDetailsVM createNew() {
         BasicDetailsVM viewModel = new BasicDetailsVM(0);
+        return viewModel;
+    }
+
+    public BasicDetailsVM createNew(boolean Emergency) {
+        int id = Emergency ? -1 : 0;
+        BasicDetailsVM viewModel = new BasicDetailsVM(id);
         return viewModel;
     }
 
@@ -42,7 +45,8 @@ public class BasicDetailsManager extends DataManager {
 
     public BasicDetails convertFromViewModelToEntity(BasicDetailsVM viewModel) {
         BasicDetails entity = new BasicDetails();
-        entity.setIdbasicDetails(viewModel.getId());
+        int id = viewModel.getId() == -1 ? 0 : viewModel.getId();
+        entity.setIdbasicDetails(id);
         entity.setFirstName(viewModel.getFirstName());
         entity.setMiddleName(viewModel.getMiddleName());
         entity.setLastName(viewModel.getLastName());
@@ -51,24 +55,8 @@ public class BasicDetailsManager extends DataManager {
         entity.setTelephone(viewModel.getTelephone());
         entity.setMobilePhone(viewModel.getMobilePhone());
         entity.setEmail(viewModel.getEmail());
-        
         // za grad
         entity.setCity(repository.getCityById(viewModel.getCityId()));
-
-//        entity.setCity(viewModel.getAllCities().stream().findFirst().get());
-//        entity.getCity().setCountry(viewModel.getAllCountries().stream().findFirst().get());
-//        repository.getAllCities()
-//                .stream()
-//                .filter(c -> c.getName().equals(viewModel.getCityName()))
-//                .findFirst()
-//                .ifPresent(c -> entity.setCity(c));
-//
-//        repository.getAllCountries()
-//                .stream()
-//                .filter(c -> c.getName().equals(viewModel.getCountryName()))
-//                .findFirst()
-//                .ifPresent(c -> entity.getCity().setCountry(c));
-
         return entity;
     }
 

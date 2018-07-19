@@ -31,8 +31,8 @@ public abstract class FormGroup {
     
     public void setIsMandatory(Boolean isMandatory) {
         this.isMandatory = isMandatory;
-        //label.setForeground(Color.red);
-        label.setText(label.getText() + "*");
+        label.setForeground(new Color(139,0,0));
+        //label.setText(label.getText() + " *");
     }
     
     public JLabel getLabel() {
@@ -52,5 +52,7 @@ public abstract class FormGroup {
     public String getErrorMessage() {
         return null;
     }
+    
+    public abstract String getReadOnlyValue();
 
 }
